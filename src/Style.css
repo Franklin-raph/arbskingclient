@@ -1,0 +1,1173 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+  font-family: "Poppins";
+}
+
+html,
+body {
+  overflow-x: hidden;
+  font-family: "Poppins";
+}
+a {
+  text-decoration: none;
+}
+.css-kr8qto {
+  display: none;
+}
+
+/*Styling Selectbox*/
+select {
+  width: 300px;
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgb(204, 204, 204);
+  transition: all .5s ease;
+  position: relative;
+  font-size: 14px;
+  color: #474747;
+  height: 100%;
+  text-align: left;
+}
+
+.dropDowns input{
+  width: 300px;
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all .5s ease;
+  position: relative;
+  font-size: 14px;
+  color: #474747;
+  height: 100%;
+  text-align: left;
+  padding: 12px 5px;
+  border: 1px solid #474747;
+  outline: none;
+}
+
+.dropDowns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 2rem;
+}
+
+#root > div > header > div > div.MuiBox-root.css-1oamlbf > div.MuiBox-root.css-1b1knv > button > span{
+  box-shadow: 0 0 10px rgba(113, 113, 113, 0.4);
+  font-size: 30px !important;
+}
+
+#bet_company, #percentFilter{
+    border: 1px solid #808080;
+    /* padding: 10px 3px; */
+    outline: none;
+}
+
+.userAndBalance{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notification-alert{
+  background-color: #344767;
+  color: #fff;
+  font-size: 12px;
+  padding: 7px;
+  border-radius: 5px;
+}
+
+.fa-shake{
+  background-color: #344767;
+  padding: 8px;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.userAndBalance p{
+  margin: 0;
+}
+
+.userAndBalance i{
+  font-size: 18px;
+}
+
+.matchCard{
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
+  position: relative;
+}
+
+.clubCard{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.bettingPlatformCard{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  border-radius: 10px;
+  /* margin-bottom: 10px; */
+}
+
+.bettingPlatformCard span{
+  margin-left: 1rem;
+}
+
+.table>:not(caption)>*>*{
+  border-bottom-width: 0;
+  /* padding: 0 0.5rem; */
+}
+
+
+.table>:not(caption)>*>*:hover{
+  background-color: none;
+}
+
+.clubCard p{
+  margin: 0;
+}
+
+.clubLogoAndBetCompany{
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+.singleClub{
+  text-align: center;
+}
+
+.singleClub img{
+  width: 15%;
+  margin-bottom: 5px;
+}
+
+.singleClub p{
+  font-size: 14px;
+}
+
+.betPatform{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+}
+
+.time{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.time p{
+  font-size: 14px;
+}
+
+.fa-calculator{
+  font-size: 20px;
+}
+
+.subscription{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
+  /* background-color: red; */
+}
+
+.subscription img, .subscription_loader img{
+  width: 50px !important;
+}
+
+.subscription_loader{
+  /* box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05); */
+  background-color: #b80000;
+  width: 80%;
+  position: fixed;
+  top: 50%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+}
+
+.makePayment{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  text-align: center;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
+  padding: 3rem;
+  border-radius: 10px;
+}
+
+.qrCode{
+  padding: 1.5rem;
+}
+
+.addressAndCopy{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #344767;
+  padding-right: 5px;
+}
+
+.addressAndCopy input{
+  outline: none;
+  padding: 5px 10px;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  border-right: 1px solid #344767;
+}
+
+.addressAndCopy i{
+  cursor: pointer;
+  padding-right: 4px;
+}
+
+.makePaymentBottomText{
+  margin-top: 30px;
+}
+
+.paymentPage{
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.subscriptionPlans{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid #9a9a9a;
+  padding: 1.8rem 0;
+  margin: 2rem 0;
+  border-radius: 7px;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
+}
+
+.second{
+  border: 1px solid #217EFE;
+}
+
+.third{
+  border: 1px solid #5829e8;
+}
+
+.subscriptionPlans h3{
+  font-size: 20px;
+}
+
+.priceAndDuration{
+  margin: 3rem 0;
+}
+
+.priceAndDuration h2{
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.subscriptionPlans button{
+  all: unset;
+  width: 50%;
+  background: linear-gradient(to right, #21BBFE, #217EFE);
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: .5s;
+  border: 1px solid transparent;
+}
+
+.subscriptionPlans button:hover{
+  background: transparent;
+  border: 1px solid #21BBFE;
+  color: #217EFE;
+  transition: .5s;
+}
+
+.playingTeamOpportunity{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #808080;
+  margin-top: 10px;
+}
+
+.teamLogoAndOdd, .displayTime{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.teamLogoAndOdd p, .displayTime p{
+  margin: 5px 0;
+}
+
+.userDoubleInfo, .depositAndVerify{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.userDoubleInfo p{
+  /* text-transform: uppercase; */
+}
+
+.userSingleInfo{
+  padding: 25px 30px;
+  border-radius: 20px;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
+  width: 100%;
+  margin-top: 20px;
+}
+
+.iconAndDetail{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.iconAndDetail p{
+  margin-bottom: 0;
+  overflow: hidden;
+  /* text-transform: uppercase; */
+}
+
+.changePasswordTab{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  /* padding-bottom: 20px; */
+}
+
+.changePasswordButton{
+  margin-left: 10px;
+  cursor: pointer;
+  color: #344767;
+  border: 1px solid #344767;
+  padding: 3px 10px;
+}
+
+.submitButton{
+  all: unset;
+  background: linear-gradient(to right, #21BBFE, #217EFE);
+  color: #fff;
+  border-radius: 3px;
+  padding: 3px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.changePasswordTab input{
+  border: 1px solid #808080;
+  padding: 4px;
+  outline: none;
+  margin: 5px 10px;
+}
+
+.msg{
+  color: red;
+  margin-bottom: 2px;
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.successMsg{
+  color: rgb(6, 179, 0);
+  margin-bottom: 2px;
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.buttonload{
+  display: flex;
+  align-items: center;
+  cursor: not-allowed;
+  justify-content:center;
+  gap: 3px;
+}
+
+.fotter{
+  position: fixed;
+  width: 80%;
+  bottom: 0;
+  right: 0;
+  background-color: #ffffff;
+  padding: 7px 14px;
+  z-index: 99999;
+  /* margin-bottom: 3rem; */
+}
+
+/* MODAL */
+.subModal{
+  background-color: #fffffff1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  text-align: center;
+  color: #000000;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 100px 20px;
+}
+
+.disabledBtn{
+  background: linear-gradient(to right, #b9eaff, #70acff) !important;
+  cursor: not-allowed !important;
+}
+
+.fa-spinner{
+  animation: button-anim 1s infinite linear;
+}
+
+.arbitrageCalculator{
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+  padding: 40px 20px;
+}
+
+.upperArbitrageCalculator{
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.upperArbitrageCalculator .topHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topHeader p{
+  text-align: center;
+}
+
+.singleBet p, .betInput p{
+  margin-bottom: 0;
+  width: 90%;
+}
+
+.singleBet{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 22px;
+}
+
+.betInput, .stakeInput, .payoutInput{
+  text-align: center;
+  width: 100%;
+}
+
+.betInput div{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+
+.singleBet input, .betInput input{
+  border: 1px solid #344767;
+  padding: 7px 10px;
+  outline: none;
+}
+
+.unCalculatedValue{
+  /* padding: 7px 10px; */
+  width: 250px;
+  /* height: 40px; */
+  background-color: rgb(217, 217, 217);
+}
+
+.calculatedValue{
+  padding: 7px 10px;
+  width: 250px;
+  height: 40px;
+  background-color: rgb(217, 217, 217);
+}
+
+.lowerArbitrageCalculator{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.lowerArbitrageCalculator button{
+  all: unset;
+  border: 1px solid #344767;
+  padding: 7px 12px;
+  margin: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.lowerArbitrageCalculator button:hover{
+  background-color: #344767;
+  color: #fff;
+  transition: .5s;
+}
+
+.finalCalculation div{
+  padding: 12px;
+  background-color: rgb(217, 217, 217);
+  border-radius: 3px;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.finalCalculation span{
+  font-weight: bold;
+}
+
+.loadingGif{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  /* width: 100%; */
+  /* height:100vh */
+}
+
+.loadingGif img{
+  width: 50%;
+  margin-top: 5rem;
+}
+
+.how-to-use-arbsking h5{
+  padding: 2.5rem 0 0;
+}
+
+.how-to-use-arbsking img{
+  margin: 3rem 0 1.8rem;
+  width: 100%;
+}
+
+.how-to-use-arbsking img:nth-of-type(1){
+  margin-top: 10px;
+}
+
+@keyframes button-anim {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width:1199px){
+
+  .fotter{
+    width: 100%;
+  }
+  .css-1y936z7-MuiDrawer-docked .MuiDrawer-paper{
+    z-index: 99999;
+  }
+}
+
+.arbs{
+  display: flex !important;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+}
+
+.arbs td{
+  display: block;
+  padding: 2px 0;
+}
+
+/* Reset Password */
+
+.passwordResetDiv .fa-xmark, .subModal .fa-xmark, .emailConfirmationDiv  .fa-xmark{
+  font-size: 2rem;
+  color: red;
+  border: 1px solid red;
+  border-radius: 50%;
+  padding: 8px 0.8rem;
+  margin-bottom: 16px;
+}
+
+.passwordResetDiv .fa-check, .subModal .fa-check, .registrationSuccessMessage .fa-check, .emailConfirmationDiv  .fa-check{
+  font-size: 2rem;
+  color: rgb(0, 191, 35);
+  border: 1px solid rgb(0, 191, 35);
+  border-radius: 50%;
+  padding: 1rem;
+  margin-bottom: 16px;
+}
+
+.subModal .fa-exclamation{
+  font-size: 2rem;
+  color: #FFD43B;
+  border: 1px solid #FFD43B;
+  border-radius: 50%;
+  padding: 1rem 1.7rem;
+  margin-bottom: 16px;
+}
+
+.passwordResetDiv, .emailConfirmationDiv{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  padding: 40px 0;
+  border-radius: 5px;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+}
+
+.passwordResetDiv input{
+  border: 1px solid #344767;
+  width: 70%;
+  margin-bottom: 20px;
+  outline: none;
+  padding: 5px 10px;
+}
+
+.resetPasswordBtn, .passwordResetDiv button, .registrationSuccessMessage button, .emailConfirmationDiv a, .chooseBookMakers{
+  all: unset;
+  background: linear-gradient(to right, #21BBFE, #217EFE);
+  color: #fff;
+  padding: 7px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.passwordResetDiv p, .emailConfirmationDiv p{
+  margin: 10px 0 20px;
+}
+
+.emailSuccess{
+  text-align: center;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 7px;
+  color: #155724;
+  font-size: 15px;
+}
+
+.emailSuccessDiv{
+  margin: 0 20px 10px;
+}
+
+.passwordResetSuccess{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 105%;
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  color: #344767;
+}
+
+.errorBg{
+  padding: 0 20px;
+}
+
+.emailError{
+  text-align: center;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  margin: 0 20px 10px;
+  padding: 7px;
+  color: #721c24;
+  font-size: 15px;
+}
+
+.css-m6bmkn-MuiPaper-root-MuiAppBar-root .MuiToolbar-root{
+  gap: 20px;
+}
+
+.noSubMsg{
+  text-align: center;
+  font-size: 22px;
+  padding: 10px 20px;
+  box-shadow: 0rem .5rem .5rem 0rem rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.registrationSuccessMessage{
+  text-align: center;
+  box-shadow: 0rem .5rem .5rem 0rem rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  font-size: 16px;
+  padding: 40px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.registrationSuccessMessageBg{
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.navLinks{
+  display: flex;
+  list-style: none;
+  margin-bottom: 0;
+  gap: 2rem;
+}
+
+.navLinks a{
+  color: #67748e;
+}
+
+.logoTag{
+  width: 5%;
+}
+
+.arbskinglogo{
+  width: 100%;
+}
+
+.bookmakeer-and-link{
+  display: flex;
+  align-items: center;
+}
+
+.arbitrageCalculator, .dasboardContainer, .paymentContainer, .profileContainer{
+  margin-bottom: 5.5rem;
+}
+
+.gridImage{
+  filter: invert(20%) sepia(34%) saturate(6050%) hue-rotate(350deg) brightness(85%) contrast(99%);
+}
+
+.shieldImage{
+  filter: invert(54%) sepia(95%) saturate(385%) hue-rotate(106deg) brightness(97%) contrast(88%);
+}
+
+.expiredImage{
+  filter: invert(95%) sepia(97%) saturate(4122%) hue-rotate(323deg) brightness(102%) contrast(101%);
+}
+
+select {
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  -ms-appearance:none;
+  appearance:none;
+  outline:0;
+  box-shadow:none;
+  border:0!important;
+  background: #e1e8e6;
+  background-image: none;
+  flex: 1;
+  padding: 0 .5em;
+  color:#000000;
+  cursor:pointer;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+}
+select::-ms-expand {
+  display: none;
+}
+
+/* .dashboardFilters{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+  margin: 3rem 0;
+} */
+
+.select {
+  position: relative;
+  display: flex;
+  width: 16rem;
+  height: 3em;
+  line-height: 3;
+  background: #000;
+  overflow: hidden;
+  border-radius: .25em;
+  /* margin-left: 3em; */
+}
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #217EFE;
+  cursor:pointer;
+  pointer-events:none;
+  transition:.25s all ease;
+}
+.select:hover::after {
+  color: #fff;
+}
+
+.verified{
+  display: none;
+}
+
+.bookmakersContainer{
+  margin: 3rem 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.chooseBookMakers, .favouriteBookMakers{
+  margin-bottom: 5rem;
+}
+
+.book-maker-box{
+  display: flex;
+  gap: 3px;
+}
+
+.bookMakerPageHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0 1rem;
+}
+
+.bookMakerPageHeader input{
+  all: unset;
+  padding: 3px 9px;
+  border: 1px solid #344767;
+}
+
+.searchInput{
+  display: flex;
+}
+
+.searchInput i{
+  background-color: #67748e;
+  padding: 10px;
+  color: #fff;
+}
+
+.opportunity-and-percent{
+  display: none;
+}
+
+input[type="checkbox"]{
+  border: 1px solid #344767 !important;
+}
+
+.abitragePart{
+  margin-top: 3rem;
+}
+
+.teamAndLeague{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.league{
+  font-size: 12px;
+}
+
+.marketInfo{
+  position: absolute;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0rem .5rem 3.5rem 0rem rgba(0, 0, 0, 0.1);
+  top: 50%;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+@media screen and (max-width:1052px) {
+  .bookmakersContainer{
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .notification-alert{
+    position: absolute;
+    z-index:999;
+    top: 50px;
+  }
+}
+
+@media screen and (max-width:992px) {
+  .arbitrageCalculator, .dasboardContainer, .paymentContainer, .profileContainer{
+    margin-bottom: 5.5rem;
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .singleBet,  .betInput div{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: start;
+  }
+
+  .singleBet input, .betInput input{
+    width: 100%;
+  }
+
+  .singleBet p{
+    width: 100%;
+  }
+
+  .stakeP{
+    display: none;
+  }
+
+  .logoTag{
+    width: 10%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .lowerArbitrageCalculator{
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .lowerArbitrageCalculator .controls{
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .logoTag{
+    width: 12%;
+  }
+
+  .subModal{
+    width: 70%;
+  }
+
+  .notification-alert{
+    top: 97px;
+  }
+}
+
+@media screen and (max-width: 678px) {
+  .changePasswordTab{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .registrationSuccessMessage, .passwordResetDiv, .emailConfirmationDiv{
+    width: 90%;
+  }
+
+  .bookmakersContainer{
+      grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.navControls{
+  display: none;
+}
+
+@media screen and (max-width: 576px) {
+  .userDoubleInfo{
+    flex-direction: column;
+  }
+
+  .dropDowns{
+    flex-direction: column;
+  }
+
+  .arbitrageCalculator, .dasboardContainer, .paymentContainer, .profileContainer{
+    margin-bottom: 5.5rem;
+  }
+  .makePayment{
+    padding: 3rem 1rem;
+  }
+
+  .navLinks{
+    box-shadow: 0rem .5rem .5rem 0rem rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    top: 97px;
+    border-radius: 50px;
+    gap: 10px;
+    z-index: 2;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 0;
+    overflow: hidden;
+    transition: .5s;
+  }
+
+  .navLinks li:nth-of-type(1){
+    margin: 10px 0 0;
+  }
+  
+  .navLinks li:nth-of-type(2){
+    margin: 0 0 10px;
+  }
+
+  .navControls{
+    display: block;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .navControls button:nth-of-type(2){
+    display: none;
+  }  
+  
+  .navOpen{
+    height: 80px;
+    transition: .5s;
+  }
+
+  .bookMakerPageHeader{
+    gap: 15px;
+    margin: 30px 0;
+    flex-direction: column;
+    /* padding: 0 9rem; */
+  }
+
+  .desktop-dashboard-view{
+    display: none;
+  }
+
+  .opportunity-and-percent{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0 3rem;
+    gap: 1rem;
+  }
+
+  .opportunity-and-percent div{
+    padding: 20px;
+    box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    color: #344767;
+    border-radius: 10px;
+    text-align: center;
+    width: 50%;
+  }
+
+  .opportunity-and-percent div p{
+    padding: 0 !important;
+    margin: 0 !important;
+    font-weight: bold;
+  }
+
+  .css-m6bmkn-MuiPaper-root-MuiAppBar-root .MuiToolbar-root{
+    gap: 0px;
+    padding: 0 !important;
+    border-bottom: 1px solid rgba(176, 176, 176, 0.223);
+  }
+
+  .css-p1u9s4, .css-z8q62l{
+    padding-top: 0 !important;
+  }
+
+  .MuiBox-root .css-1ohcek5{
+    display: none;
+  }
+
+  .notification-alert{
+    top: 50px;
+  }
+  .makePayment li{
+    font-size: 14px;
+    margin: 5px 0;
+  }
+
+  .subscriptionText h2{
+    font-size: 20px;
+  }
+
+  header{
+    margin-bottom: 20px;
+  }
+
+  .league{
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .bookmakersContainer{
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .arbs p, .clubCard p{
+    font-size: 10px !important;
+  }
+
+  .betPatform{
+    margin: 0 !important;
+  }
+}
+
