@@ -71,7 +71,6 @@ function Dashboard({ brand, routes }) {
 
   const navigate = useNavigate();
 
-  const socket = new WebSocket("ws://192.168.8.100:4000");
   useEffect(() => {
     if (!loggedInUser) {
       navigate("/dashboard/authentication/sign-in");
