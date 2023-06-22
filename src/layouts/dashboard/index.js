@@ -74,19 +74,8 @@ function Dashboard({ brand, routes }) {
       navigate("/dashboard/authentication/sign-in");
     }
     // getOpportunitiesTruWebSocket();
-    getOpportunities()
+    getOpportunities();
   }, []);
-
-  // function getOpportunitiesTruWebSocket(){
-  //   console.log("first")
-  //   socket.addEventListener("open", () => {
-  //     socket.send(loggedInUser.token);
-  //   });
-    
-  //     socket.addEventListener("message", (event) => {
-  //     console.log("Received message from server:", JSON.parse(event.data));
-  //   });
-  // }
 
   async function getOpportunities() {
     setIsLoading(true);

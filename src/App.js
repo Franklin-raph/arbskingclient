@@ -48,27 +48,6 @@ import EmailConfirmPage from "layouts/authentication/confirm-email";
 import Howtouse from "layouts/howtouse";
 
 export default function App() {
-  const socket = new WebSocket("ws://192.168.8.100:4000");
-  socket.addEventListener("open", () => {
-    // alert("Established");
-    socket.send("Hello from the client!");
-    console.log("WebSocket connection established");
-
-    // Send a message to the server
-  });
-
-  // socket.addEventListener("message", (event) => {
-  //   console.log("Received message from server:", event.data);
-  // });
-
-  socket.addEventListener("notification", (event) => {
-    console.log("Received message from server:", event.data);
-  });
-
-  // socket.addEventListener('close', () => {
-  //   console.log('WebSocket connection closed');
-  // });
-
   return (
     <ThemeProvider theme={themeRTL}>
       <Routes>
