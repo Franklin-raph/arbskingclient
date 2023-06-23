@@ -832,13 +832,13 @@ select::-ms-expand {
   display: none;
 }
 
-/* .dashboardFilters{
+.dashboardFilters{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 5rem;
   margin: 3rem 0;
-} */
+}
 
 .select {
   position: relative;

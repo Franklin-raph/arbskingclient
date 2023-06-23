@@ -127,10 +127,17 @@ function DashboardNavbar({ absolute, light, isMini }) {
     });
 
     socket.addEventListener("message", (event) => {
-      console.log(event.data)
-      if(event.data === "true" ){
-        setShowNotificationMsg(true)
-        setNotificationBell(true)
+      console.log(event.data);
+      if (event.data === "true") {
+        setShowNotificationMsg(true);
+        setNotificationBell(true);
+        return
+      }
+
+      if(event.data === "false"){
+        setShowNotificationMsg(false);
+        setNotificationBell(false);
+        return
       }
     });
   }
@@ -171,8 +178,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
   };
 
   async function checkNotification() {
-    setShowNotificationMsg(false)
-    setNotificationBell(false)
+    localStorage.setItem("notify", "false");
+    setShowNotificationMsg(false);
+    setNotificationBell(false);
     // setShowNotification(true);
     // setNotification(!notification);
     // const response = await fetch(
@@ -272,15 +280,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                     >
                       ${userBalance && userBalance}
                     </p>
-                    {loading ? (
-                      <i className="fa-solid fa-spinner fa-spin"></i>
-                    ) : (
-                      <i
-                        className="fa-solid fa-arrow-rotate-right"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => getUserBalance()}
-                      ></i>
-                    )}
+                    {loading ? <i className="fa-solid fa-spinner fa-spin"></i> : ""}
                   </div>
                 </div>
               </div>

@@ -326,6 +326,7 @@ function Dashboard({ brand, routes }) {
                 <option value="favouriteBookMakers">My Favourite BookMakers</option>
               </select>
             </div>
+            <i className="fa-solid fa-arrow-rotate-right" style={{ cursor: "pointer" }} onClick={() => getOpportunities()}></i>
           </div>
 
           {arbs === null ? (
