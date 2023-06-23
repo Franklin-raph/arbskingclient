@@ -476,7 +476,7 @@ function Dashboard({ brand, routes }) {
         </SoftBox>
       </div>
       <div className="fotter">
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </DashboardLayout>
   );
