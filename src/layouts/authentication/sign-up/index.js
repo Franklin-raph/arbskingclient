@@ -250,6 +250,7 @@ function SignUp() {
                       color="dark"
                       fontWeight="bold"
                       textGradient
+                      ml={1}
                     >
                       Sign in
                     </SoftTypography>

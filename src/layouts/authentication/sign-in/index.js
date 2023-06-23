@@ -156,17 +156,6 @@ function SignIn() {
                 Forgot Password?
               </Link>
             </div>
-            {/* <SoftBox display="flex" alignItems="center">
-              <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-              <SoftTypography
-                variant="button"
-                fontWeight="regular"
-                onClick={handleSetRememberMe}
-                sx={{ cursor: "pointer", userSelect: "none" }}
-              >
-                &nbsp;&nbsp;Remember me
-              </SoftTypography>
-            </SoftBox> */}
             <SoftBox mt={2} mb={2} textAlign="center">
               <h6
                 style={{
@@ -180,7 +169,7 @@ function SignIn() {
                 {error}
               </h6>
             </SoftBox>
-            <SoftBox mt={4} mb={1}>
+            <SoftBox mt={4} mb={1} >
               <SoftButton variant="gradient" color="info" onClick={submitFormData} fullWidth>
                 sign in
               </SoftButton>
@@ -188,17 +177,7 @@ function SignIn() {
             <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">
                 Don&apos;t have an account?
-                <a href="/dashboard/authentication/sign-up">Sign up</a>
-                {/* <SoftTypography
-                  component={Link}
-                  to="/authentication/sign-up"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  Sign up
-                </SoftTypography> */}
+                <a href="/dashboard/authentication/sign-up" style={{ marginLeft:"7px" }}>Sign up</a>
               </SoftTypography>
             </SoftBox>
           </SoftBox>

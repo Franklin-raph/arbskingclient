@@ -52,20 +52,8 @@ import LoadingGif from "../../assets/images/loader/loading-gif.gif";
 import howtouseimage1 from "../../images/howtouseimage1.jpg"
 import howtouseimage2 from "../../images/howtouseimage2.jpg"
 import howtouseimage3 from "../../images/howtouseimage3.jpg"
-import { Link } from "react-router-dom";
 
 function Dashboard({ brand, routes }) {
-  const [arbs, setArbs] = useState();
-  const [arbsInvalid, setArbsInvalid] = useState("");
-  const [arbsTotal, setArbsTotal] = useState("");
-  const [arbsAvg, setArbsAvg] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [marketInfo, setMarketInfo] = useState(false);
-  const [bookmarkers, setBookmarkers] = useState();
-  const [selectedCompany, setSelectedCompany] = useState("");
-  const [selectedItemId, setSelectedItemId] = useState(null);
-  const { size } = typography;
-  const { chart, items } = reportsBarChartData;
 
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
 

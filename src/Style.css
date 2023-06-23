@@ -98,7 +98,7 @@ select {
 
 .matchCard{
   box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
-  margin-top: 30px;
+  margin-top: 70px;
   position: relative;
 }
 
@@ -106,9 +106,29 @@ select {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
   padding: 1rem;
   border-radius: 10px;
   margin-bottom: 10px;
+}
+
+.time-market-calc{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.profit{
+  background-color: rgb(26, 200, 136);
+  padding: 2px 7px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.time{
+
 }
 
 .bettingPlatformCard{
@@ -169,7 +189,13 @@ select {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 3px;
+  font-weight: bold;
+  color: yellowgreen
+}
+
+.mobile{
+  display: none;
 }
 
 .time p{
@@ -935,12 +961,26 @@ input[type="checkbox"]{
 .marketInfo{
   position: absolute;
   background-color: #fff;
+  /* width: 70%; */
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0rem .5rem 3.5rem 0rem rgba(0, 0, 0, 0.1);
-  top: 50%;
+  top: 70%;
   transform: translateX(-50%);
   left: 50%;
+}
+
+.error-page{
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.go-to-mobile{
+  display: none;
+  visibility: hidden;
 }
 
 @media screen and (max-width:1052px) {
@@ -1013,6 +1053,27 @@ input[type="checkbox"]{
 }
 
 @media screen and (max-width: 678px) {
+  .desktop{
+    display: none;
+  }
+
+  .mobile{
+    display: block;
+  }
+
+  .go-to{
+    display: none;
+  }
+
+  .go-to-mobile{
+    display: block;
+    visibility: hidden;
+  }
+
+  .marketInfo{
+    /* width: 70%; */
+  }
+
   .changePasswordTab{
     flex-direction: column;
     align-items: flex-start;
@@ -1032,6 +1093,7 @@ input[type="checkbox"]{
 }
 
 @media screen and (max-width: 576px) {
+
   .userDoubleInfo{
     flex-direction: column;
   }

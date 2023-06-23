@@ -42,6 +42,7 @@ import Overview from "layouts/profile";
 import Bookmakers from "layouts/bookmakers";
 import Billing from "layouts/billing";
 import RTL from "layouts/rtl";
+import PageNotFound from "layouts/pagenotfound";
 import ForgotPassword from "layouts/authentication/forgotpassword";
 import PasswordResetPage from "layouts/authentication/password-reset-page";
 import EmailConfirmPage from "layouts/authentication/confirm-email";
@@ -73,6 +74,7 @@ export default function App() {
           path="/dashboard/arbitragecalculator"
           element={<RTL brand={brand} routes={routes} />}
         />
+        <Route path="*" element={<PageNotFound routes={routes} brand={brand}/> } />
       </Routes>
     </ThemeProvider>
   );

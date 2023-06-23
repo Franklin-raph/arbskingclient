@@ -77,6 +77,7 @@ function Dashboard({ brand, routes }) {
 
   async function getOpportunities() {
     setIsLoading(true);
+    setSelectedCompany("all");
     const response = await fetch("https://sportbetpredict.onrender.com/api/account/arbs", {
       headers: {
         "Content-Type": "application/json",
@@ -245,6 +246,11 @@ function Dashboard({ brand, routes }) {
     }
   }
 
+  function reloadsArbsOpportunities() {
+    getOpportunities();
+    setSelectedCompany("all");
+  }
+
   function filterBetCompany(e) {
     setSelectedCompany(e.target.value);
     console.log(selectedCompany);
@@ -269,6 +275,10 @@ function Dashboard({ brand, routes }) {
     setMarketInfo(!marketInfo);
     setSelectedItemId(itemId === selectedItemId ? null : itemId);
   }
+
+  setTimeout(() => {
+    setMarketInfo(false);
+  }, 7000);
 
   return (
     <DashboardLayout>
@@ -304,15 +314,15 @@ function Dashboard({ brand, routes }) {
           <div className="opportunity-and-percent">
             <div>
               <h6>Opp.</h6>
-              <p>46</p>
+              <p>{arbs && arbs.arbs.length}</p>
             </div>
             <div>
               <h6>Total%</h6>
-              <p>319.5%</p>
+              <p>{arbsTotal && arbsTotal.toFixed(2)}</p>
             </div>
             <div>
               <h6>Avg%</h6>
-              <p>6.95</p>
+              <p>{arbsAvg && arbsAvg.toFixed(2)}</p>
             </div>
           </div>
           <div className="loadingGif">{isLoading && <img src={LoadingGif} />}</div>
@@ -326,7 +336,15 @@ function Dashboard({ brand, routes }) {
                 <option value="favouriteBookMakers">My Favourite BookMakers</option>
               </select>
             </div>
-            <i className="fa-solid fa-arrow-rotate-right" style={{ cursor: "pointer" }} onClick={() => getOpportunities()}></i>
+            {!isLoading ? (
+              <i
+                className="fa-solid fa-arrow-rotate-right"
+                style={{ cursor: "pointer" }}
+                onClick={() => reloadsArbsOpportunities()}
+              ></i>
+            ) : (
+              <i className="fa-solid fa-spinner fa-spin"></i>
+            )}
           </div>
 
           {arbs === null ? (
@@ -334,14 +352,9 @@ function Dashboard({ brand, routes }) {
           ) : (
             <>
               {arbs &&
-                arbs.arbs.map((arb) => (
-                  <div className="matchCard" key={arb._id}>
+                arbs.arbs.map((arb, index) => (
+                  <div className="matchCard" key={index}>
                     <div className="clubCard">
-                      <div className="time">
-                        <i className="fa-regular fa-clock"></i>
-                        <p>{arb.matchTime}</p>
-                      </div>
-
                       <div className="teamAndLeague">
                         <div className="clubLogoAndBetCompany">
                           <div className="singleClub">
@@ -363,21 +376,33 @@ function Dashboard({ brand, routes }) {
                         <small className="league">{arb.league}</small>
                       </div>
 
-                      <div>
-                        <p>{arb.profit}%</p>
-                      </div>
-                      <div>
-                        <Link to="/dashboard/arbitragecalculator" state={{ value: arb.odds }}>
-                          <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
-                        </Link>
+                      <div className="time-market-calc">
+                        <div className="time">
+                          <i className="fa-regular fa-clock"></i>
+                          <p>{arb.matchTime}</p>
+                        </div>
+
+                        <div>
+                          <p className="profit">{arb.profit}%</p>
+                        </div>
+                        <div>
+                          <Link to="/dashboard/arbitragecalculator" state={{ value: arb.odds }}>
+                            <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                     <div className="arbs">
                       <div style={{ paddingBottom: "1rem" }}>
-                        <p style={{ fontWeight: "bold", fontSize: "17px" }}>Book Maker</p>
+                        <p style={{ fontWeight: "bold", fontSize: "17px" }} className="desktop">
+                          Book Maker
+                        </p>
+                        <p style={{ fontWeight: "bold", fontSize: "17px" }} className="mobile">
+                          BM
+                        </p>
                         {arb &&
-                          arb.bookmakers.split(",").map((bookmaker) => (
-                            <p key={bookmaker} style={{ display: "block" }}>
+                          arb.bookmakers.split(",").map((bookmaker, index) => (
+                            <p key={index} style={{ display: "block" }}>
                               {bookmaker}
                             </p>
                           ))}
@@ -390,18 +415,19 @@ function Dashboard({ brand, routes }) {
                             display: "flex",
                             gap: "3px",
                             alignItems: "center",
+                            textAlign: "center",
                           }}
                         >
                           Market
                           <i
-                            class="fa-solid fa-circle-info"
+                            className="fa-solid fa-circle-info"
                             style={{ cursor: "pointer" }}
                             onClick={() => clickedMarketInfo(arb._id)}
                           ></i>
                         </p>
                         {arb &&
-                          arb.markets.split(",").map((market) => (
-                            <p className="text-muted" key={market}>
+                          arb.markets.split(",").map((market, index) => (
+                            <p className="text-muted" key={index}>
                               {market}
                             </p>
                           ))}
@@ -413,21 +439,29 @@ function Dashboard({ brand, routes }) {
                             arb.marketExplaination
                               .split(",")
                               .map(
-                                (market) =>
-                                  arb._id === selectedItemId && <p key={market}>{market}</p>
+                                (market, index) =>
+                                  arb._id === selectedItemId && <p key={index}>{market}</p>
                               )}
                         </div>
                       )}
 
                       <div>
                         <p style={{ fontWeight: "bold", fontSize: "17px" }}>Odds</p>
-                        {arb && arb.odds.split(",").map((odd) => <p key={odd}>{odd}</p>)}
+                        {arb && arb.odds.split(",").map((odd, index) => <p key={index}>{odd}</p>)}
                       </div>
                       <div>
-                        <p style={{ fontWeight: "bold", fontSize: "17px" }}>Go to</p>
+                        <p
+                          style={{ fontWeight: "bold", fontSize: "17px" }}
+                          className="go-to-mobile"
+                        >
+                          .
+                        </p>
+                        <p style={{ fontWeight: "bold", fontSize: "17px" }} className="go-to">
+                          Go to
+                        </p>
                         {arb &&
-                          arb.bookmakersLink.split(",").map((bookmaker) => (
-                            <p key={bookmaker} style={{ display: "block" }}>
+                          arb.bookmakersLink.split(",").map((bookmaker, index) => (
+                            <p key={index} style={{ display: "block" }}>
                               <a href={`${bookmaker}`} target="_blank">
                                 <i className="fa-solid fa-up-right-from-square"></i>
                               </a>
