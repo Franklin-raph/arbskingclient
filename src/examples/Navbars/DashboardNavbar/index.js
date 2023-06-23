@@ -116,7 +116,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
   }, [dispatch, fixedNavbar]);
 
   function getOpportunitiesViaWebSocket() {
-    const socket = new WebSocket("ws://sportbetpredict.onrender.com");
+    // const socket = new WebSocket("ws://192.168.8.100:3000");
+    const socket = new WebSocket("wss://sportbetpredict.onrender.com");
 
     socket.addEventListener("open", () => {
       console.log("WebSocket connection established");
