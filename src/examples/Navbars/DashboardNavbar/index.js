@@ -71,8 +71,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const route = useLocation().pathname.split("/").slice(1);
   const navigate = useNavigate();
   const [userBalance, setUserBalance] = useState("");
-  const [notification, setNotification] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
+  const [notificationBell, setNotificationBell] = useState(false);
+  const [showNotificationMsg, setShowNotificationMsg] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { user } = useAuth();
@@ -109,9 +109,30 @@ function DashboardNavbar({ absolute, light, isMini }) {
     // Call the handleTransparentNavbar function to set the state with the initial value.
     handleTransparentNavbar();
 
+    getOpportunitiesViaWebSocket();
+
     // Remove event listener on cleanup
     return () => window.removeEventListener("scroll", handleTransparentNavbar);
   }, [dispatch, fixedNavbar]);
+
+  function getOpportunitiesViaWebSocket() {
+    const socket = new WebSocket("ws://sportbetpredict.onrender.com");
+
+    socket.addEventListener("open", () => {
+      console.log("WebSocket connection established");
+
+      // Send a message to the server
+      socket.send(loggedInUser.token);
+    });
+
+    socket.addEventListener("message", (event) => {
+      console.log(event.data)
+      if(event.data === "true" ){
+        setShowNotificationMsg(true)
+        setNotificationBell(true)
+      }
+    });
+  }
 
   async function getUserBalance() {
     setLoading(true);
@@ -130,7 +151,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
     const data = await response.json();
     console.log("User balance status => ", data);
     setUserBalance(data.userBalance);
-    setNotification(data.notification)
+    // setNotification(data.notification);
     if (data.jwtStatus !== "Not Expired") {
       navigate("/dashboard/authentication/sign-in");
     }
@@ -148,21 +169,25 @@ function DashboardNavbar({ absolute, light, isMini }) {
     return navigate("/dashboard/authentication/sign-in");
   };
 
-  async function checkNotification(){
-    setShowNotification(true)
-    setNotification(!notification)
-    const response = await fetch("https://sportbetpredict.onrender.com/api/account/change/notification",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${loggedInUser.token}`,
-        },
-      })
-    const data = await response.json()
-    setTimeout(()=> {
-      setShowNotification(false)
-    },3000)
-    console.log(data)
+  async function checkNotification() {
+    setShowNotificationMsg(false)
+    setNotificationBell(false)
+    // setShowNotification(true);
+    // setNotification(!notification);
+    // const response = await fetch(
+    //   "https://sportbetpredict.onrender.com/api/account/change/notification",
+    //   {
+    //     method: "GET",
+    //     headers: {
+    //       Authorization: `Bearer ${loggedInUser.token}`,
+    //     },
+    //   }
+    // );
+    // const data = await response.json();
+    // setTimeout(() => {
+    //   setShowNotification(false);
+    // }, 3000);
+    // console.log(data);
   }
 
   // Render the notifications menu
@@ -222,10 +247,16 @@ function DashboardNavbar({ absolute, light, isMini }) {
               sx={(theme) => navbarRow(theme, { isMini })}
             >
               <div className="userAndBalance">
-                {showNotification && <p className="notification-alert">Please refresh to view the latest opportunities</p>}
-                {notification && <i class="fa-regular fa-bell fa-shake" onClick={checkNotification}></i> }
-                
-                {!notification &&<i class="fa-regular fa-bell"></i>}
+                {showNotificationMsg && (
+                  <p className="notification-alert">
+                    Please refresh to view the latest opportunities
+                  </p>
+                )}
+                {notificationBell && (
+                  <i className="fa-regular fa-bell fa-shake" onClick={checkNotification}></i>
+                )}
+
+                {!notificationBell && <i className="fa-regular fa-bell"></i>}
                 {/* <i className="fa-solid fa-user fs-3"></i> */}
                 <div>
                   {/* <p className="white-text">Available Balance</p> */}
@@ -241,7 +272,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                       ${userBalance && userBalance}
                     </p>
                     {loading ? (
-                      <i class="fa-solid fa-spinner fa-spin"></i>
+                      <i className="fa-solid fa-spinner fa-spin"></i>
                     ) : (
                       <i
                         className="fa-solid fa-arrow-rotate-right"
