@@ -117,7 +117,7 @@ function Overview({ brand, routes }) {
       <div className="profileContainer">
         <div className="userDoubleInfo">
           <div className="userSingleInfo">
-            <p>First Name</p>
+            <p style={{ fontWeight:"bold" }}>First Name</p>
             <div className="iconAndDetail">
               <i className="fa-solid fa-user"></i>
               <p>
@@ -139,7 +139,7 @@ function Overview({ brand, routes }) {
             </div>
           </div>
           <div className="userSingleInfo">
-            <p>Last Name</p>
+            <p style={{ fontWeight:"bold" }}>Last Name</p>
             <div className="iconAndDetail">
               <i className="fa-solid fa-user"></i>
               <p>{loggedInUser && loggedInUser.userDetails.lastname}</p>
@@ -149,14 +149,14 @@ function Overview({ brand, routes }) {
 
         <div className="userDoubleInfo">
           <div className="userSingleInfo">
-            <p>Email</p>
+            <p style={{ fontWeight:"bold" }}>Email</p>
             <div className="iconAndDetail">
               <i className="fa-solid fa-envelope"></i>
               <p>{loggedInUser && loggedInUser.userDetails.email}</p>
             </div>
           </div>
           <div className="userSingleInfo">
-            <p>Payment Address</p>
+            <p style={{ fontWeight:"bold" }}>Payment Address</p>
             <div className="iconAndDetail">
               <i className="fa-solid fa-wallet"></i>
               <p>{loggedInUser && loggedInUser.userDetails.paymentAddress}</p>
@@ -166,7 +166,7 @@ function Overview({ brand, routes }) {
 
         <div className="userDoubleInfo">
           <div className="userSingleInfo">
-            <p>Password</p>
+            <p style={{ fontWeight:"bold" }}>Password</p>
             <div className="iconAndDetail">
               <i className="fa-solid fa-key"></i>
               <p>**********</p>
@@ -221,7 +221,7 @@ function Overview({ brand, routes }) {
           </div>
           <div className="userSingleInfo">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <p>Referral Link</p>
+              <p style={{ fontWeight:"bold" }}>Referral Link</p>
               {loggedInUser && loggedInUser.userDetails.referralAgent ? (
                 <>
                   {copyICon ? (

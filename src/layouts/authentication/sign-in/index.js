@@ -50,6 +50,8 @@ function SignIn() {
   });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [inputType, setInputType] = useState("password");
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     localStorage.clear();
@@ -95,6 +97,11 @@ function SignIn() {
     }
   };
 
+  const toggleInput = () => {
+    setInputType(inputType === "password" ? "text" : "password");
+    setShowPassword(!showPassword);
+  };
+
   // const handleRedirect = () => {
   //   return navigate("/dashboard");
   // };
@@ -117,11 +124,8 @@ function SignIn() {
         </SoftBox>
       ) : (
         <>
-          <SoftBox display="flex" flexDirection="column" alignItems="center" mb={2}>
-            {/* <GithubSocial /> */}
-          </SoftBox>
           <Separator />
-          <SoftBox component="form" role="form">
+          <SoftBox component="form" role="form" position="relative">
             <SoftBox mb={2}>
               <SoftBox mb={1} ml={0.5}>
                 <SoftTypography component="label" variant="caption" fontWeight="bold">
@@ -142,13 +146,23 @@ function SignIn() {
                   Password
                 </SoftTypography>
               </SoftBox>
-              <SoftInput
-                type="password"
-                name="password"
-                onChange={handleFormData}
-                placeholder="Password"
-                value={formData?.password}
-              />
+
+              <div className="password-and-eye-for-login">
+                <SoftBox mb={2}>
+                  <SoftInput
+                    type={inputType}
+                    name="password"
+                    onChange={handleFormData}
+                    placeholder="Password"
+                    required
+                  />
+                </SoftBox>
+                {!showPassword ? (
+                  <i className="fa-regular fa-eye" onClick={toggleInput}></i>
+                ) : (
+                  <i className="fa-regular fa-eye-slash" onClick={toggleInput}></i>
+                )}
+              </div>
             </SoftBox>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
               <div></div>
@@ -169,7 +183,7 @@ function SignIn() {
                 {error}
               </h6>
             </SoftBox>
-            <SoftBox mt={4} mb={1} >
+            <SoftBox mt={4} mb={1}>
               <SoftButton variant="gradient" color="info" onClick={submitFormData} fullWidth>
                 sign in
               </SoftButton>
@@ -177,7 +191,9 @@ function SignIn() {
             <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">
                 Don&apos;t have an account?
-                <a href="/dashboard/authentication/sign-up" style={{ marginLeft:"7px" }}>Sign up</a>
+                <a href="/dashboard/authentication/sign-up" style={{ marginLeft: "7px" }}>
+                  Sign up
+                </a>
               </SoftTypography>
             </SoftBox>
           </SoftBox>

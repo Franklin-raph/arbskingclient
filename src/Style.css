@@ -355,8 +355,20 @@ select {
   gap: 20px;
 }
 
-.userDoubleInfo p{
-  /* text-transform: uppercase; */
+.password-and-eye i{
+  position: absolute;
+  cursor: pointer;
+  z-index: 999;
+  top: 335px;
+  right: 30px;
+}
+
+.password-and-eye-for-login i{
+  position: absolute;
+  cursor: pointer;
+  z-index: 999;
+  top: 130px;
+  right: 10px;
 }
 
 .userSingleInfo{

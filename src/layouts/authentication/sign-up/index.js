@@ -50,6 +50,8 @@ function SignUp() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [inputType, setInputType] = useState("password");
+  const [showPassword, setShowPassword] = useState(false);
 
   const { user } = useAuth();
   console.log(user);
@@ -96,23 +98,14 @@ function SignUp() {
       console.log(data);
       setError(data.message);
     }
-    // AuthApi.Register(formData)
-    //   .then((response) => {
-    //     if (response.data.success) {
-    //       return navigate("/authentication/sign-in");
-    //     } else {
-    //       setError(response.data.msg);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     if (error.response) {
-    //       return setError(error.response.data.msg);
-    //     }
-    //     return setError("There has been an error.");
-    //   });
   };
 
   const handleRedirect = () => navigate("/dashboard");
+
+  const toggleInput = () => {
+    setInputType(inputType === "password" ? "text" : "password");
+    setShowPassword(!showPassword);
+  };
   // Registration Successful. A Confirmation Email as been sent to frank123@gmial.com
   // franknew22222
   return (
@@ -122,7 +115,15 @@ function SignUp() {
           <p className="registrationSuccessMessage">
             <i className="fa-solid fa-check"></i>
             {success}
-            <button style={{ marginTop: "10px" }} onClick={() => {setSuccess(false); navigate("/dashboard/authentication/sign-in")}}>Ok</button>
+            <button
+              style={{ marginTop: "10px" }}
+              onClick={() => {
+                setSuccess(false);
+                navigate("/dashboard/authentication/sign-in");
+              }}
+            >
+              Ok
+            </button>
           </p>
         </div>
       )}
@@ -193,15 +194,22 @@ function SignUp() {
                     required
                   />
                 </SoftBox>
-                <SoftBox mb={2}>
-                  <SoftInput
-                    type="password"
-                    name="password"
-                    onChange={handleFormData}
-                    placeholder="Password"
-                    required
-                  />
-                </SoftBox>
+                <div className="password-and-eye">
+                  <SoftBox mb={2}>
+                    <SoftInput
+                      type={inputType}
+                      name="password"
+                      onChange={handleFormData}
+                      placeholder="Password"
+                      required
+                    />
+                  </SoftBox>
+                  {!showPassword ? (
+                    <i className="fa-regular fa-eye" onClick={toggleInput}></i>
+                  ) : (
+                    <i className="fa-regular fa-eye-slash" onClick={toggleInput}></i>
+                  )}
+                </div>
                 <SoftBox display="flex" alignItems="center">
                   <Checkbox checked={agreement} onChange={handleSetAgremment} />
                   <SoftTypography
