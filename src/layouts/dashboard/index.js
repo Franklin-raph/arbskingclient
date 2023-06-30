@@ -326,7 +326,6 @@ function Dashboard({ brand, routes }) {
             </div>
           </div>
           <div className="loadingGif">{isLoading && <img src={LoadingGif} />}</div>
-
           <div className="dashboardFilters">
             <div className="select">
               <select name="languages" id="bet_company" onChange={filterBetCompany}>
