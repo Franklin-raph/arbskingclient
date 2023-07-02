@@ -47,6 +47,7 @@ import ForgotPassword from "layouts/authentication/forgotpassword";
 import PasswordResetPage from "layouts/authentication/password-reset-page";
 import EmailConfirmPage from "layouts/authentication/confirm-email";
 import Howtouse from "layouts/howtouse";
+import Referals from "layouts/referals";
 
 export default function App() {
   return (
@@ -74,6 +75,7 @@ export default function App() {
           path="/dashboard/arbitragecalculator"
           element={<RTL brand={brand} routes={routes} />}
         />
+        <Route path="/dashboard/referals" element={<Referals routes={routes} brand={brand}/> } />
         <Route path="*" element={<PageNotFound routes={routes} brand={brand}/> } />
       </Routes>
     </ThemeProvider>

@@ -71,7 +71,7 @@ function SignIn() {
       })
       const data = await response.json()
       if(response) localStorage.clear();
-      console.log(response, data)
+      // console.log(response, data)
     }
   }
 

@@ -55,6 +55,7 @@ import SpaceShip from "examples/Icons/SpaceShip";
 import CustomerSupport from "examples/Icons/CustomerSupport";
 import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
+import Referals from "layouts/referals";
 
 const routes = [
   {
@@ -139,6 +140,16 @@ const routes = [
     component: <Profile />,
     noCollapse: true,
     protected: true,
+  },
+
+  {
+    type: "collapse",
+    name: "Referals",
+    key: "Referals",
+    route: "/dashboard/referals",
+    icon: <SpaceShip size="12px" />,
+    component: <Referals />,
+    noCollapse: true,
   },
 
   {

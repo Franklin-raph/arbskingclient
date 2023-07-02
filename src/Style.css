@@ -995,6 +995,28 @@ input[type="checkbox"]{
   visibility: hidden;
 }
 
+.referralContainer{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.referralDiv{
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 1.5rem;
+}
+
+.referralDiv p{
+  margin-bottom: 0;
+}
+
+.referralHeader{
+  font-size: 26px;
+  margin-left: 2.5rem; 
+  margin-top: 2rem
+}
+
 @media screen and (max-width:1052px) {
   .bookmakersContainer{
     grid-template-columns: repeat(3, 1fr);
@@ -1061,6 +1083,14 @@ input[type="checkbox"]{
 
   .notification-alert{
     top: 97px;
+  }
+
+  .referralContainer{
+    grid-template-columns: 1fr;
+  }
+
+  .referralDiv{
+    margin: 1rem;
   }
 }
 
@@ -1242,6 +1272,11 @@ input[type="checkbox"]{
 
   .betPatform{
     margin: 0 !important;
+  }
+
+  .referralHeader{
+    font-size: 18px;
+    margin-left: 1.5rem;
   }
 }
 
