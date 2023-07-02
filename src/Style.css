@@ -1012,9 +1012,68 @@ input[type="checkbox"]{
 }
 
 .referralHeader{
+  margin: 2rem 2.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.referralHeader h1{
   font-size: 26px;
-  margin-left: 2.5rem; 
-  margin-top: 2rem
+}
+
+.referralHeader button{
+  all: unset;
+  background-color: #1AC888;
+  border-radius: 5px;
+  padding: 3px 7px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.withdrawalModalBg, .withdrawalSuccessModalBg{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.485);
+  z-index: 99999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05); */
+}
+
+.withdrawalModal, .withdrawalSuccessModal{
+  width: 40%;
+  background-color: #fff;
+  padding:35px 20px 25px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.withdrawalModal i, .withdrawalSuccessModal i{
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.referralDiv div i{
+  cursor: pointer;
+}
+
+.referralDiv div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.referred-users{
+  margin: 2rem 1.5rem 6rem;
 }
 
 @media screen and (max-width:1052px) {
@@ -1091,6 +1150,10 @@ input[type="checkbox"]{
 
   .referralDiv{
     margin: 1rem;
+  }
+
+  .withdrawalModal, .withdrawalSuccessModal{
+    width: 60%;
   }
 }
 
@@ -1259,6 +1322,10 @@ input[type="checkbox"]{
   .league{
     font-size: 10px;
   }
+
+  .withdrawalModal, .withdrawalSuccessModal{
+    width: 80%;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -1275,8 +1342,14 @@ input[type="checkbox"]{
   }
 
   .referralHeader{
-    font-size: 18px;
     margin-left: 1.5rem;
+  }
+  .referralHeader h1{
+    font-size: 18px;
+  }
+
+  .withdrawalModal, .withdrawalSuccessModal{
+    width: 90%;
   }
 }
 
