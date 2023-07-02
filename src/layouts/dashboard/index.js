@@ -385,7 +385,7 @@ function Dashboard({ brand, routes }) {
                           <p className="profit">{arb.profit}%</p>
                         </div>
                         <div>
-                          <Link to="/dashboard/arbitragecalculator" state={{ value: arb.odds }}>
+                          <Link to="/dashboard/arbitragecalculator" state={{ value: arb.odds, bms: arb.bookmakers }}>
                             <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
                           </Link>
                         </div>

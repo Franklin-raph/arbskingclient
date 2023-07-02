@@ -144,7 +144,7 @@ const routes = [
 
   {
     type: "collapse",
-    name: "Referals",
+    name: "Referrals",
     key: "Referals",
     route: "/dashboard/referals",
     icon: <SpaceShip size="12px" />,

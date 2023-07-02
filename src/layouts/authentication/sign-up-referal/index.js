@@ -55,7 +55,7 @@ function SignUp() {
   const { user } = useAuth();
 
   useEffect(() => {
-    localStorage.clear();
+    // localStorage.clear();
     getReferalInfo();
   }, []);
 
@@ -92,6 +92,7 @@ function SignUp() {
     });
     if (response) {
       setIsLoading(false);
+      localStorage.clear();
     }
     const data = await response.json();
     if (response.ok) {

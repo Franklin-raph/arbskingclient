@@ -52,7 +52,7 @@ const Referals = ({ brand, routes }) => {
             {loading ? (
                 <i className="fa-solid fa-spinner fa-spin"></i>
             ) : (
-                <h1 style={{ color:"#1AC888" }}>{referalData && referalData.referralEarnings}</h1>
+                <h1 style={{ color:"#1AC888" }}>${referalData && referalData.referralEarnings}</h1>
             )}
 
             <p>Referral Earnings</p>
@@ -63,7 +63,7 @@ const Referals = ({ brand, routes }) => {
             {loading ? (
                 <i className="fa-solid fa-spinner fa-spin"></i>
             ) : (
-                <h1 style={{ color:"#1AC888" }}>{referalData && referalData.referralBonusEarned}</h1>
+                <h1 style={{ color:"#1AC888" }}>${referalData && referalData.referralBonusEarned}</h1>
             )}
 
             <p>Referral Bonus Earned</p>
@@ -72,7 +72,7 @@ const Referals = ({ brand, routes }) => {
             {loading ? (
                 <i className="fa-solid fa-spinner fa-spin"></i>
             ) : (
-                <h1 style={{ color:"#D21403" }}>{referalData && referalData.referralBonusLost}</h1>
+                <h1 style={{ color:"#D21403" }}>${referalData && referalData.referralBonusLost}</h1>
             )}
 
             <p>Referral Bonus Lost</p>

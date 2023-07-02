@@ -57,7 +57,7 @@ function SignUp() {
   console.log(user);
 
   useEffect(() => {
-    localStorage.clear();
+    // localStorage.clear();
   }, []);
 
   const handleSetAgremment = () => setAgremment(!agreement);
@@ -87,6 +87,7 @@ function SignUp() {
     });
     if (response) {
       setIsLoading(false);
+      localStorage.clear();
     }
     const data = await response.json();
     if (response.ok) {

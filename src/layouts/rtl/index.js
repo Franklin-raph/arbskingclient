@@ -60,9 +60,9 @@ function RTL({ brand, routes }) {
 
   const location = useLocation();
   console.log(location.state);
-
+  
   const [odds, setOdds] = useState([]);
-
+  
   useEffect(() => {
     if (location.state === null) {
       setOdds([
@@ -70,7 +70,9 @@ function RTL({ brand, routes }) {
         { odd: 0, stake: 0, payout: 0 },
       ]);
     } else {
+      // console.log(location.state.bms.split(", "));
       const oddsArray = location.state.value.split(",").map((str) => parseFloat(str.trim()));
+      console.log(oddsArray)
 
       if (oddsArray.length === 2) {
         console.log(oddsArray.length);
@@ -83,6 +85,7 @@ function RTL({ brand, routes }) {
           { odd: obj.odd2, stake: 0, payout: 0 },
         ]);
         return;
+
       } else if (oddsArray.length === 3) {
         console.log(oddsArray.length);
         const obj = {
@@ -161,6 +164,7 @@ function RTL({ brand, routes }) {
                 <div className="betInput">
                   <div>
                     <p>Bet {index + 1}</p>
+                    <p>{}</p>
                     <input
                       type="number"
                       id={"odd-input-" + index}
