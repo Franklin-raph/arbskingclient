@@ -149,9 +149,6 @@ const routes = [
     icon: <SpaceShip size="12px" />,
     component: <SignOut />,
     noCollapse: true,
-    pageReload: function(){
-      location.reload()
-    }
   },
 ];
 

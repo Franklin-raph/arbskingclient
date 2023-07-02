@@ -24,11 +24,12 @@ function SignOut() {
   // let { user } = useAuth();
 
   const handleLogout = async () => {
+    alert("Logged out")
     // await AuthApi.Logout(user);
     // await setUser(null);
     console.log("dfgjk")
     localStorage.clear();
-    return navigate("/authentication/sign-in");
+    // return navigate("/dashboard/authentication/sign-in");
   };
 
   useEffect(() => {

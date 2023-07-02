@@ -171,9 +171,11 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleCloseMenu = () => setOpenMenu(false);
 
   const handleLogout = () => {
-    AuthApi.Logout(user);
+    // AuthApi.Logout(user);
+    alert("Logged out")
     setUser(null);
     localStorage.clear();
+    console.log("logging out")
     return navigate("/dashboard/authentication/sign-in");
   };
 

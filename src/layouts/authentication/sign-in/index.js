@@ -53,9 +53,27 @@ function SignIn() {
   const [inputType, setInputType] = useState("password");
   const [showPassword, setShowPassword] = useState(false);
 
+  const loggedInUser = JSON.parse(localStorage.getItem("user"))
+
   useEffect(() => {
-    localStorage.clear();
+    console.log("Logged out")
+    hadleLogout()
   }, []);
+
+  async function hadleLogout(){
+    if(loggedInUser){
+      const response = await fetch("https://sportbetpredict.onrender.com/api/account/logout/reset-login-status", {
+        method: "POST",
+        body: JSON.stringify({userId:loggedInUser.userDetails._id}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      const data = await response.json()
+      if(response) localStorage.clear();
+      console.log(response, data)
+    }
+  }
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
@@ -69,11 +87,6 @@ function SignIn() {
   const submitFormData = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // try {
-
-    // } catch (error) {
-
-    // }
     const response = await fetch("https://sportbetpredict.onrender.com/api/login", {
       method: "POST",
       body: JSON.stringify(formData),
