@@ -56,6 +56,7 @@ import CustomerSupport from "examples/Icons/CustomerSupport";
 import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
 import Referals from "layouts/referals";
+import { Calculate, CurrencyBitcoin, Help, TransferWithinAStation } from "@mui/icons-material";
 
 const routes = [
   {
@@ -103,7 +104,7 @@ const routes = [
     name: "Arbitrage Calculator",
     key: "rtl",
     route: "/dashboard/arbitragecalculator",
-    icon: <Settings size="12px" />,
+    icon: <Calculate size="12px" />,
     component: <RTL />,
     noCollapse: true,
     protected: true,
@@ -136,7 +137,7 @@ const routes = [
     name: "How to Use",
     key: "profile",
     route: "/dashboard/howtouse",
-    icon: <CustomerSupport size="12px" />,
+    icon: <Help size="12px" />,
     component: <Profile />,
     noCollapse: true,
     protected: true,
@@ -147,7 +148,7 @@ const routes = [
     name: "Referrals",
     key: "Referals",
     route: "/dashboard/referals",
-    icon: <SpaceShip size="12px" />,
+    icon: <TransferWithinAStation size="12px" />,
     component: <Referals />,
     noCollapse: true,
   },
