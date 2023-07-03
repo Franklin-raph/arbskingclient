@@ -60,10 +60,10 @@ function RTL({ brand, routes }) {
 
   const location = useLocation();
   console.log(location.state);
-  
+
   const [odds, setOdds] = useState([]);
   const [bms, setBms] = useState([]);
-  
+
   useEffect(() => {
     if (location.state === null) {
       setOdds([
@@ -73,15 +73,16 @@ function RTL({ brand, routes }) {
     } else {
       // console.log(location.state.bms.split(", "));
       const oddsArray = location.state.value.split(",").map((str) => parseFloat(str.trim()));
-      const bmArray = location.state.bms.split(", ")
-      console.log(oddsArray)
-      console.log(bmArray)
+      const bmArray = location.state.bms.split(", ");
+      console.log(oddsArray);
+      console.log(bmArray);
 
       if (oddsArray.length === 2) {
         console.log(oddsArray.length);
         const obj = {
           odd1: oddsArray[0],
           odd2: oddsArray[1],
+          // bm1:
         };
         setOdds([
           { odd: obj.odd1, stake: 0, payout: 0 },
@@ -90,14 +91,10 @@ function RTL({ brand, routes }) {
 
         const bmObj = {
           bm1: bmArray[0],
-          bm2: bmArray[1]
+          bm2: bmArray[1],
         };
-        setBms([
-          {bm:bmObj.bm1},
-          {bm:bmObj.bm2}
-        ])
+        setBms([{ bm: bmObj.bm1 }, { bm: bmObj.bm2 }]);
         return;
-
       } else if (oddsArray.length === 3) {
         console.log(oddsArray.length);
         const obj = {
@@ -110,10 +107,23 @@ function RTL({ brand, routes }) {
           { odd: obj.odd2, stake: 0, payout: 0 },
           { odd: obj.odd3, stake: 0, payout: 0 },
         ]);
+
+        const bmObj = {
+          bm1: bmArray[0],
+          bm2: bmArray[1],
+          bm3: bmArray[2],
+        };
+        setBms([
+              { bm: bmObj.bm1 },
+              { bm: bmObj.bm2 },
+              { bm: bmObj.bm3 }
+            ]);
         return;
       }
     }
   }, []);
+
+  console.log(odds, bms);
 
   const handleAddBetDiv = () => {
     if (odds.length === 4) return;
@@ -168,6 +178,14 @@ function RTL({ brand, routes }) {
         <h5 style={{ textAlign: "center", marginBottom: "2rem" }}>
           Use the Arbitrage Calculator here
         </h5>
+        <div className="positionedBookMakers">
+          {bms.map((bm, index) => (
+            <div>
+              <p>Bet {index + 1} = </p>
+              <p>{bm.bm}</p>
+            </div>
+          ))}
+        </div>
         <div className="upperArbitrageCalculator">
           <div className="topHeader"></div>
           {odds.map((odd, index) => (
@@ -199,6 +217,15 @@ function RTL({ brand, routes }) {
               </div>
             </div>
           ))}
+
+          {/* {bms.map((bm, index) => (
+            <div key={index} >
+              <div>
+                <p>Bet {index + 1}</p>
+                <p className="positionedBookMakers">{bm.bm}</p>
+              </div>
+            </div>
+          ))} */}
 
           <div className="singleBet">
             <div className="betInput">

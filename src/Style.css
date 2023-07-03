@@ -1076,6 +1076,22 @@ input[type="checkbox"]{
   margin: 2rem 1.5rem 6rem;
 }
 
+.positionedBookMakers p{
+  margin-bottom: 0;
+  font-size: 13px;
+}
+
+.positionedBookMakers{
+  margin-left: 2rem;
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+}
+
+.positionedBookMakers div{
+  display: flex;
+}
+
 @media screen and (max-width:1052px) {
   .bookmakersContainer{
     grid-template-columns: repeat(3, 1fr);
@@ -1326,6 +1342,12 @@ input[type="checkbox"]{
   .withdrawalModal, .withdrawalSuccessModal{
     width: 80%;
   }
+
+  .positionedBookMakers{
+    margin-left: 0;
+    margin-bottom: 16px;
+    gap: 1rem;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -1350,6 +1372,10 @@ input[type="checkbox"]{
 
   .withdrawalModal, .withdrawalSuccessModal{
     width: 90%;
+  }
+
+  .positionedBookMakers{
+    flex-direction: column;
   }
 }
 
