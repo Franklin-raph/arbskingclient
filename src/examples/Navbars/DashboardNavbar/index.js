@@ -131,13 +131,13 @@ function DashboardNavbar({ absolute, light, isMini }) {
       if (event.data === "true") {
         setShowNotificationMsg(true);
         setNotificationBell(true);
-        return
+        return;
       }
 
-      if(event.data === "false"){
+      if (event.data === "false") {
         setShowNotificationMsg(false);
         setNotificationBell(false);
-        return
+        return;
       }
     });
   }
@@ -161,8 +161,24 @@ function DashboardNavbar({ absolute, light, isMini }) {
     setUserBalance(data.userBalance);
     // setNotification(data.notification);
     if (data.jwtStatus !== "Not Expired") {
+      changeLoginStatusIfJwtExpires();
       navigate("/dashboard/authentication/sign-in");
     }
+  }
+
+  async function changeLoginStatusIfJwtExpires() {
+    const response = await fetch(
+      "https://sportbetpredict.onrender.com/api/account/logout/reset-login-status",
+      {
+        method: "POST",
+        body: JSON.stringify({ userId: loggedInUser.userDetails._id }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    if (response) localStorage.clear();
   }
 
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
@@ -172,10 +188,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
 
   const handleLogout = () => {
     // AuthApi.Logout(user);
-    alert("Logged out")
     setUser(null);
     localStorage.clear();
-    console.log("logging out")
     return navigate("/dashboard/authentication/sign-in");
   };
 

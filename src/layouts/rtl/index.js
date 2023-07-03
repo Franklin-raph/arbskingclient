@@ -62,6 +62,7 @@ function RTL({ brand, routes }) {
   console.log(location.state);
   
   const [odds, setOdds] = useState([]);
+  const [bms, setBms] = useState([]);
   
   useEffect(() => {
     if (location.state === null) {
@@ -72,7 +73,9 @@ function RTL({ brand, routes }) {
     } else {
       // console.log(location.state.bms.split(", "));
       const oddsArray = location.state.value.split(",").map((str) => parseFloat(str.trim()));
+      const bmArray = location.state.bms.split(", ")
       console.log(oddsArray)
+      console.log(bmArray)
 
       if (oddsArray.length === 2) {
         console.log(oddsArray.length);
@@ -84,6 +87,15 @@ function RTL({ brand, routes }) {
           { odd: obj.odd1, stake: 0, payout: 0 },
           { odd: obj.odd2, stake: 0, payout: 0 },
         ]);
+
+        const bmObj = {
+          bm1: bmArray[0],
+          bm2: bmArray[1]
+        };
+        setBms([
+          {bm:bmObj.bm1},
+          {bm:bmObj.bm2}
+        ])
         return;
 
       } else if (oddsArray.length === 3) {
@@ -164,7 +176,8 @@ function RTL({ brand, routes }) {
                 <div className="betInput">
                   <div>
                     <p>Bet {index + 1}</p>
-                    <p>{}</p>
+                    {/* {bms.map(bm =>(<p>{bm}</p>))} */}
+                    {/* {console.log(odd.bm)} */}
                     <input
                       type="number"
                       id={"odd-input-" + index}
