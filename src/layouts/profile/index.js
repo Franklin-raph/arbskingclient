@@ -42,10 +42,13 @@ function Overview({ brand, routes }) {
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
   const [showPasswordTab, setShowPasswordTab] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [addressLoading, setAddressLoading] = useState(false);
 
   const [oldpassword, setOldPassword] = useState("");
   const [newpassword, setNewPassword] = useState("");
+  const [withdrawalAddress, setWithdrawalAddress] = useState("");
   const [msg, setMsg] = useState("");
+  const [withdrawalAddressMsg, setWithdrawalAddressMsg] = useState("Add or Edit your withdrawal address");
   const [successMsg, setSuccessMsg] = useState("");
   const [hoverState, setHoverState] = useState(false);
   const [copyICon, setCopyIcon] = useState(true);
@@ -64,34 +67,67 @@ function Overview({ brand, routes }) {
       setMsg("Please the fields can not be left empty");
       setTimeout(() => {
         setMsg("");
-      }, 2000);
+      }, 5000);
       return;
+    } else {
+      setLoading(true);
+      const resp = await fetch("https://sportbetpredict.onrender.com/api/changepassword", {
+        method: "POST",
+        body: JSON.stringify({ oldpassword, newpassword }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${loggedInUser.token}`,
+        },
+      });
+      if (resp) {
+        setLoading(false);
+      }
+      const data = await resp.json();
+      if (resp.ok) {
+        console.log(data);
+        setSuccessMsg(data.message);
+        setTimeout(() => {
+          setSuccessMsg("");
+        }, 5000);
+      }
+      if (!resp.ok) {
+        setMsg(data.message);
+        setTimeout(() => {
+          setMsg("");
+        }, 5000);
+      }
     }
-    setLoading(true);
-    const resp = await fetch("https://sportbetpredict.onrender.com/api/changepassword", {
-      method: "POST",
-      body: JSON.stringify({ oldpassword, newpassword }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${loggedInUser.token}`,
-      },
-    });
-    if (resp) {
-      setLoading(false);
-    }
-    const data = await resp.json();
-    if (resp.ok) {
+  }
+
+  async function changeWithdrawalAddress() {
+    if (withdrawalAddress.length <= 0) {
+      setWithdrawalAddressMsg("Please input a withdrawal address");
+      setTimeout(() => {
+        setWithdrawalAddressMsg("Edit your wallet address");
+      }, 5000);
+      return;
+    } else {
+      setAddressLoading(true);
+      const response = await fetch(
+        "https://sportbetpredict.onrender.com/api/account/change/withdrawal-address",
+        {
+          method: "POST",
+          body: JSON.stringify({ withdrawalAddress: withdrawalAddress }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${loggedInUser.token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (response) setAddressLoading(false);
+      if (response.ok) {
+        setWithdrawalAddressMsg(data.message);
+        setTimeout(() => {
+          setWithdrawalAddressMsg("Edit your withdrawal address");
+        }, 5000);
+      }
       console.log(data);
-      setSuccessMsg(data.message);
-      setTimeout(() => {
-        setSuccessMsg("");
-      }, 2000);
-    }
-    if (!resp.ok) {
-      setMsg(data.message);
-      setTimeout(() => {
-        setMsg("");
-      }, 2000);
     }
   }
 
@@ -109,15 +145,12 @@ function Overview({ brand, routes }) {
 
   return (
     <DashboardLayout>
-      {/* <div style={{ color: "#fff !important" }}>
-        <Header />
-      </div> */}
       <DashboardNavbar />
       <Sidenav brand={brand} brandName="Arbsking" routes={routes} />
       <div className="profileContainer">
         <div className="userDoubleInfo">
           <div className="userSingleInfo">
-            <p style={{ fontWeight:"bold" }}>First Name</p>
+            <p style={{ fontWeight: "bold" }}>First Name</p>
             <div className="iconAndDetail">
               <i className="fa-solid fa-user"></i>
               <p>
@@ -139,7 +172,7 @@ function Overview({ brand, routes }) {
             </div>
           </div>
           <div className="userSingleInfo">
-            <p style={{ fontWeight:"bold" }}>Last Name</p>
+            <p style={{ fontWeight: "bold" }}>Last Name</p>
             <div className="iconAndDetail">
               <i className="fa-solid fa-user"></i>
               <p>{loggedInUser && loggedInUser.userDetails.lastname}</p>
@@ -149,14 +182,14 @@ function Overview({ brand, routes }) {
 
         <div className="userDoubleInfo">
           <div className="userSingleInfo">
-            <p style={{ fontWeight:"bold" }}>Email</p>
+            <p style={{ fontWeight: "bold" }}>Email</p>
             <div className="iconAndDetail">
               <i className="fa-solid fa-envelope"></i>
               <p>{loggedInUser && loggedInUser.userDetails.email}</p>
             </div>
           </div>
           <div className="userSingleInfo">
-            <p style={{ fontWeight:"bold" }}>Payment Address</p>
+            <p style={{ fontWeight: "bold" }}>Payment Address</p>
             <div className="iconAndDetail">
               <i className="fa-solid fa-wallet"></i>
               <p>{loggedInUser && loggedInUser.userDetails.paymentAddress}</p>
@@ -166,7 +199,7 @@ function Overview({ brand, routes }) {
 
         <div className="userDoubleInfo">
           <div className="userSingleInfo">
-            <p style={{ fontWeight:"bold" }}>Password</p>
+            <p style={{ fontWeight: "bold" }}>Password</p>
             <div className="iconAndDetail">
               <i className="fa-solid fa-key"></i>
               <p>**********</p>
@@ -220,14 +253,70 @@ function Overview({ brand, routes }) {
             </div>
           </div>
           <div className="userSingleInfo">
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <p style={{ fontWeight:"bold" }}>Referral Link</p>
-              {loggedInUser && loggedInUser.userDetails.referralAgent ? (
-                <>
-                  {copyICon ? (
+            <div className="iconAndDetail" style={{ justifyContent: "space-between" }}>
+              <p style={{ fontWeight: "bold" }}>Withdrawal Address</p>
+              <div>
+                <small style={{ marginRight: "5px", fontSize: "12px" }}>
+                  {withdrawalAddressMsg}
+                </small>
+                <i className="fa-regular fa-pen-to-square" style={{ cursor: "pointer" }}></i>
+              </div>
+            </div>
+            <div className="iconAndDetail">
+              <i className="fa-solid fa-wallet"></i>
+              <input
+                type="text"
+                style={{
+                  outline: "none",
+                  padding: "5px",
+                  width: "100%",
+                  border: "1px solid #344767",
+                }}
+                placeholder={loggedInUser && loggedInUser.userDetails.paymentAddress}
+                onChange={(e) => setWithdrawalAddress(e.target.value)}
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+                alignItems: "center",
+              }}
+            >
+              <p></p>
+              <button
+                style={{ marginTop: ".5rem", fontSize: "13px", border: "1px solid #000" }}
+                onClick={changeWithdrawalAddress}
+              >
+                {addressLoading ? <i className="fa-solid fa-spinner"></i> : "Save"}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="userSingleInfo">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <p style={{ fontWeight: "bold" }}>Referral Link</p>
+            {loggedInUser && loggedInUser.userDetails.referralAgent ? (
+              <>
+                {copyICon ? (
+                  <i
+                    className="fa-regular fa-copy"
+                    onClick={copyToClipboard}
+                    style={{
+                      cursor: "pointer",
+                      padding: "7px",
+                      borderRadius: "50px",
+                      color: "#fff",
+                      backgroundColor: "#344767",
+                      fontSize: "12px",
+                    }}
+                  ></i>
+                ) : (
+                  <div>
                     <i
-                      class="fa-regular fa-copy"
-                      onClick={copyToClipboard}
+                      className="fa-solid fa-check"
                       style={{
                         cursor: "pointer",
                         padding: "7px",
@@ -237,34 +326,20 @@ function Overview({ brand, routes }) {
                         fontSize: "12px",
                       }}
                     ></i>
-                  ) : (
-                    <div>
-                      <i
-                        className="fa-solid fa-check"
-                        style={{
-                          cursor: "pointer",
-                          padding: "7px",
-                          borderRadius: "50px",
-                          color: "#fff",
-                          backgroundColor: "#344767",
-                          fontSize: "12px",
-                        }}
-                      ></i>
-                    </div>
-                  )}
-                </>
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="iconAndDetail">
-              <i className="fa-solid fa-link"></i>
-              {loggedInUser && loggedInUser.userDetails.referralAgent ? (
-                <p>{loggedInUser.userDetails.referrralLink}</p>
-              ) : (
-                <p>You are not yet qualified to be a referral agent, purchase a sub to be one</p>
-              )}
-            </div>
+                  </div>
+                )}
+              </>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="iconAndDetail">
+            <i className="fa-solid fa-link"></i>
+            {loggedInUser && loggedInUser.userDetails.referralAgent ? (
+              <p>{loggedInUser.userDetails.referrralLink}</p>
+            ) : (
+              <p>You are not yet qualified to be a referral agent, purchase a sub to be one</p>
+            )}
           </div>
         </div>
       </div>
