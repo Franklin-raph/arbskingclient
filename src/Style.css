@@ -1073,7 +1073,33 @@ input[type="checkbox"]{
 }
 
 .referred-users{
-  margin: 2rem 1.5rem 6rem;
+  margin: 2rem 1.5rem;
+}
+
+.pendingAndHistory{
+  padding: 1.5rem;
+  margin-bottom: 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.pendingWithdrawal div, .withdrawalHistory div{
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.pendingWithdrawal div i, .withdrawalHistory div i{
+  cursor: pointer;
+}
+
+.pendingWithdrawal, .withdrawalHistory{
+  box-shadow: 0rem .5rem .5rem 0rem rgba(0, 0, 0, 0.1);
+  padding: 15px 1.5rem 5px;
+  border-radius: 5px;
 }
 
 .positionedBookMakers p{
@@ -1170,6 +1196,10 @@ input[type="checkbox"]{
 
   .withdrawalModal, .withdrawalSuccessModal{
     width: 60%;
+  }
+
+  .pendingAndHistory{
+    grid-template-columns: 1fr;
   }
 }
 

@@ -13,9 +13,14 @@ const Referals = ({ brand, routes }) => {
   const [referralBonusEarned, setReferralBonusEarned] = useState(false);
   const [referralEarnings, setReferralEarnings] = useState(false);
   const [referralBonusLost, setReferralBonusLost] = useState(false);
+  const [pendingWithdrawal, setPendingWithdrawal] = useState(false);
+  const [withdrawalHistory, setWithdrawalHistory] = useState(false);
+  const [pendingWithdrawalInfo, setPendingWithdrawalInfo] = useState("");
+  const [withdrawalHistoryInfo, setWithdrawalHistoryInfo] = useState("");
 
   useEffect(() => {
     getMyReferralDetails();
+    getWithdrawalHistory();
   }, []);
 
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
@@ -38,6 +43,25 @@ const Referals = ({ brand, routes }) => {
       setReferalData(data.message);
     }
     console.log(response, data);
+  }
+
+  async function getWithdrawalHistory() {
+    const response = await fetch(
+      "https://sportbetpredict.onrender.com/api/account/user/pending/withdrawal-history",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${loggedInUser.token}`,
+        },
+      }
+    );
+    console.log(response);
+    const data = await response.json();
+    if (response) {
+      setPendingWithdrawalInfo(data.message);
+      console.log(data);
+    }
   }
 
   function checkWithdrawal() {
@@ -189,6 +213,31 @@ const Referals = ({ brand, routes }) => {
         </p>
         <ul>{referalData && referalData.referredUser.map((user) => <li>{user}</li>)}</ul>
       </div>
+
+      <div className="pendingAndHistory">
+        <div className="pendingWithdrawal">
+          <div>
+            <h6>Pending Withdrawals</h6>
+            <i
+              class="fa-solid fa-angle-down"
+              onClick={() => setPendingWithdrawal(!pendingWithdrawal)}
+            ></i>
+          </div>
+          {pendingWithdrawal && <p>{pendingWithdrawalInfo}</p>}
+        </div>
+
+        <div className="withdrawalHistory">
+          <div>
+            <h6>Withdrawal History</h6>
+            <i
+              class="fa-solid fa-angle-down"
+              onClick={() => setWithdrawalHistory(!withdrawalHistory)}
+            ></i>
+          </div>
+          <p>{}</p>
+        </div>
+      </div>
+
       <div className="fotter">
         <Footer />
       </div>
