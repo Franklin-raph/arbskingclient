@@ -272,7 +272,7 @@ function Overview({ brand, routes }) {
                   width: "100%",
                   border: "1px solid #344767",
                 }}
-                placeholder={loggedInUser && loggedInUser.userDetails.paymentAddress}
+                placeholder={loggedInUser && loggedInUser.userDetails.withdrawalAddress}
                 onChange={(e) => setWithdrawalAddress(e.target.value)}
               />
             </div>

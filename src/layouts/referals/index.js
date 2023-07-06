@@ -93,7 +93,7 @@ const Referals = ({ brand, routes }) => {
   }
 
   function checkWithdrawal() {
-    if (referalData.referralBonusEarned >= 10) {
+    if (referalData.withdrawBalance >= 10) {
       setIsSuccessWithdrawalModalOpen(true);
     } else {
       setIsWithdrawalModalOpen(true);
