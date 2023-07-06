@@ -1020,9 +1020,10 @@ input[type="checkbox"]{
 
 .referralHeader h1{
   font-size: 26px;
+  margin-bottom: 0;
 }
 
-.referralHeader button{
+.referralHeader button, .withdrawalSuccessModal button{
   all: unset;
   background-color: #1AC888;
   border-radius: 5px;
@@ -1054,12 +1055,20 @@ input[type="checkbox"]{
   position: relative;
 }
 
-.withdrawalModal i, .withdrawalSuccessModal i{
+.withdrawalModal i, .withdrawalSuccessModal .fa-circle-xmark{
   position: absolute;
   top: 10px;
   right: 15px;
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+.fa-money-bill-transfer{
+  color: #fff;
+}
+
+.withdrawalSuccessModal input::placeholder{
+  font-size: 12px;
 }
 
 .referralDiv div i{
@@ -1377,6 +1386,18 @@ input[type="checkbox"]{
     margin-left: 0;
     margin-bottom: 16px;
     gap: 1rem;
+  }
+
+  .referralHeader h1{
+    font-size: 18px;
+  }
+
+  .withdrawalSuccessModal button{
+    margin-top: 10px;
+  }
+
+  .withdrawalSuccessModal input{
+    width: 90%;
   }
 }
 

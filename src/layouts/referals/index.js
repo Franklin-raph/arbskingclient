@@ -16,7 +16,9 @@ const Referals = ({ brand, routes }) => {
   const [pendingWithdrawal, setPendingWithdrawal] = useState(false);
   const [withdrawalHistory, setWithdrawalHistory] = useState(false);
   const [pendingWithdrawalInfo, setPendingWithdrawalInfo] = useState("");
-  const [withdrawalHistoryInfo, setWithdrawalHistoryInfo] = useState("");
+  const [withdrawalRequestInfo, setWithdrawalRequestInfo] = useState("");
+  const [withdrawRequestAmount, setWithdrawaRequestAmount] = useState(0);
+  const [withdrawRequestLoader, setWithdrawaRequestLoader] = useState(false);
 
   useEffect(() => {
     getMyReferralDetails();
@@ -64,6 +66,32 @@ const Referals = ({ brand, routes }) => {
     }
   }
 
+  async function makeWithdrawRequest() {
+    if (!withdrawRequestAmount || withdrawRequestAmount.length <= 0) {
+      setWithdrawalRequestInfo("Please input an amount to withdraw");
+      return;
+    }
+    setWithdrawaRequestLoader(true);
+    const response = await fetch(
+      "https://sportbetpredict.onrender.com/api/account/referral/withdrawal",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${loggedInUser.token}`,
+        },
+        body: JSON.stringify({ withdrawalAmount: withdrawRequestAmount }),
+      }
+    );
+    console.log(response)
+    if (response) setWithdrawaRequestLoader(false);
+    const data = await response.json();
+    if(!response.ok){
+      setWithdrawalRequestInfo(data.message)
+    }
+    console.log(data);
+  }
+
   function checkWithdrawal() {
     if (referalData.referralBonusEarned >= 10) {
       setIsSuccessWithdrawalModalOpen(true);
@@ -78,13 +106,39 @@ const Referals = ({ brand, routes }) => {
       <DashboardNavbar />
       {isSuccessWithdrawalModalOpen && (
         <div className="withdrawalSuccessModalBg">
-          <p className="withdrawalSuccessModal">
+          <div className="withdrawalSuccessModal" style={{ textAlign: "center" }}>
             <i
               class="fa-regular fa-circle-xmark"
               onClick={() => setIsSuccessWithdrawalModalOpen(!isSuccessWithdrawalModalOpen)}
             ></i>
-            You are qualified for withdrawal
-          </p>
+            <p style={{ marginBottom: "0" }}>You are qualified for withdrawal</p>
+            {withdrawalRequestInfo && (
+              <small style={{ color: "#ff0000" }}>{withdrawalRequestInfo}</small>
+            )}
+
+            <div style={{ marginTop: "10px" }}>
+              <input
+                type="number"
+                style={{
+                  border: "1px solid #344767",
+                  outline: "none",
+                  padding: "2px 5px",
+                  marginRight: "10px",
+                }}
+                placeholder="Enter amount to withdraw"
+                onChange={(e) => setWithdrawaRequestAmount(e.target.value)}
+              />
+              <button onClick={makeWithdrawRequest}>
+                {withdrawRequestLoader ? (
+                  <i className="fa-solid fa-spinner fa-spin"></i>
+                ) : (
+                  <>
+                    <i class="fa-solid fa-money-bill-transfer"></i> Withdraw
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
         </div>
       )}
       {isWithdrawalModalOpen && (
@@ -205,6 +259,32 @@ const Referals = ({ brand, routes }) => {
           )}
         </div>
       </div>
+
+      <div className="referralContainer">
+        <div className="referralBonusLost" style={{ width: "100%" }}>
+          <div className="referralDiv">
+            {loading ? (
+              <i className="fa-solid fa-spinner fa-spin"></i>
+            ) : (
+              <h1 style={{ color: "#666" }}>${referalData && referalData.withdrawBalance}</h1>
+            )}
+            <div>
+              <p>Withdrawable Balance</p>
+              <i
+                class="fa-solid fa-angle-down"
+                // onClick={() => setReferralBonusLost(!referralBonusLost)}
+              ></i>
+            </div>
+          </div>
+          {/* {referralBonusLost && (
+            <p style={{ padding: " 0 1.5rem" }}>
+              This denotes the amount of referral bonus that is forfeited when your referral
+              purchases a subscription, but you do not have an active subscription yourself.
+            </p>
+          )} */}
+        </div>
+      </div>
+
       <div className="referred-users">
         <h5>Referred Users({referalData && referalData.referredUser.length})</h5>
         <p>
