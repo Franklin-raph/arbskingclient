@@ -107,7 +107,7 @@ select {
 }
 
 .dasboardContainer{
-  user-select: none;
+  user-select: none !important;
 }
 
 .clubCard{
@@ -640,6 +640,12 @@ select {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media print {
+  .dasboardContainer {
+     display: none !important;  /* hide whole page */
   }
 }
 

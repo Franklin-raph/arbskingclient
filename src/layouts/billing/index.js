@@ -271,7 +271,7 @@ function Payment({ brand, routes }) {
                 </p>
                 <div>
                   <i class="fa-brands fa-whatsapp"></i>
-                  <a href="https://wa.me/message/QWVCK5JG65EKH1">Vendor 1</a>
+                  <a target="_blank" href="https://wa.me/message/QWVCK5JG65EKH1">Vendor 1</a>
                 </div>
               </div>
             </div>
