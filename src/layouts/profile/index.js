@@ -48,7 +48,9 @@ function Overview({ brand, routes }) {
   const [newpassword, setNewPassword] = useState("");
   const [withdrawalAddress, setWithdrawalAddress] = useState("");
   const [msg, setMsg] = useState("");
-  const [withdrawalAddressMsg, setWithdrawalAddressMsg] = useState("Add or Edit your withdrawal address");
+  const [withdrawalAddressMsg, setWithdrawalAddressMsg] = useState(
+    "Add or Edit your withdrawal address"
+  );
   const [successMsg, setSuccessMsg] = useState("");
   const [hoverState, setHoverState] = useState(false);
   const [copyICon, setCopyIcon] = useState(true);
@@ -284,7 +286,7 @@ function Overview({ brand, routes }) {
                 alignItems: "center",
               }}
             >
-              <p></p>
+              <small style={{ marginLeft:"25px" }}>We pay in USDT or BUSD</small>
               <button
                 style={{ marginTop: ".5rem", fontSize: "13px", border: "1px solid #000" }}
                 onClick={changeWithdrawalAddress}

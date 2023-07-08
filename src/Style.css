@@ -72,6 +72,10 @@ select {
   gap: 10px;
 }
 
+.fa-bullhorn{
+  transform: rotateX(360deg);
+}
+
 .notification-alert{
   background-color: #344767;
   color: #fff;
@@ -1127,6 +1131,34 @@ input[type="checkbox"]{
   display: flex;
 }
 
+.whatsApplinkNumbers{
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.whatsApplinkNumbers div{
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #344767;
+  border: 1px solid #344767;
+  padding: 3px 9px;
+  border-radius: 6px;
+}
+
+.whatsApplinkNumbers a{
+  color: #344767;
+}
+
+.whatsApplinkNumbers div:hover{
+  background-color: #344767;
+  color: #fff;
+}
+
+.whatsApplinkNumbers a:hover{
+  color: #fff;
+}
+
 @media screen and (max-width:1052px) {
   .bookmakersContainer{
     grid-template-columns: repeat(3, 1fr);
@@ -1398,6 +1430,10 @@ input[type="checkbox"]{
 
   .withdrawalSuccessModal input{
     width: 90%;
+  }
+
+  .whatsApplinkNumbers p{
+    font-size: 14px;
   }
 }
 

@@ -25,7 +25,7 @@ import grid from "../../images/grid.png";
 import qrcode from "../../images/qr-code.png";
 import QRCode from "react-qr-code";
 import { useState, useEffect } from "react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import LoadingGif from "../../assets/images/loader/loading-gif.gif";
 
 // Soft UI Dashboard React routes
@@ -179,9 +179,11 @@ function Payment({ brand, routes }) {
                   ) : (
                     loading && (
                       <Grid item xs={12} lg={6}>
-                        <div className="subscription" style={{ fontSize:"24px" }}>
+                        <div className="subscription" style={{ fontSize: "24px" }}>
                           <i class="fa-solid fa-spinner fa-spin"></i>
-                          <p style={{ marginBottom: "0", fontSize:"16px" }}>Getting subscription status</p>
+                          <p style={{ marginBottom: "0", fontSize: "16px" }}>
+                            Getting subscription status
+                          </p>
                         </div>
                       </Grid>
                     )
@@ -223,9 +225,7 @@ function Payment({ brand, routes }) {
                 <li>
                   From our available plans below, you can now purchase any plan of your choice.
                 </li>
-                <li>
-                  Our mode of payments is BUSD, USDT (BEP-20).
-                </li>
+                <li>Our mode of payments is BUSD, USDT (BEP-20).</li>
               </ul>
 
               <div className="qrCodeAndAddress">
@@ -262,6 +262,18 @@ function Payment({ brand, routes }) {
                   <i className="fa-solid fa-arrow-right" style={{ marginLeft: "5px" }}></i>
                 </a>
               </p>
+              <div className="whatsApplinkNumbers">
+                <p>
+                  Should you continue to encounter challenges while attempting to make a payment to
+                  the designated address independently, we offer you an alternative solution of
+                  engaging one of our esteemed verified vendors.<br />
+                  You can contact them via the WhatsApp contacts below
+                </p>
+                <div>
+                  <i class="fa-brands fa-whatsapp"></i>
+                  <a href="https://wa.me/message/QWVCK5JG65EKH1">Vendor 1</a>
+                </div>
+              </div>
             </div>
           </SoftBox>
 

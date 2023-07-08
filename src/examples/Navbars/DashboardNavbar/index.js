@@ -282,9 +282,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 )}
 
                 {!notificationBell && <i className="fa-regular fa-bell"></i>}
-                {/* <i className="fa-solid fa-user fs-3"></i> */}
+                <i class="fa-solid fa-bullhorn"></i>
                 <div>
-                  {/* <p className="white-text">Available Balance</p> */}
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                     <p
                       style={{
