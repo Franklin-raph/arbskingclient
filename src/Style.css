@@ -106,6 +106,10 @@ select {
   position: relative;
 }
 
+.dasboardContainer{
+  user-select: none;
+}
+
 .clubCard{
   display: flex;
   align-items: center;
