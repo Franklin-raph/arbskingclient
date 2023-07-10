@@ -113,7 +113,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
 
     getOpportunitiesViaWebSocket();
 
-    setAnnouncementDot(loggedInUser.userDetails.notification)
+  
     // Remove event listener on cleanup
     return () => window.removeEventListener("scroll", handleTransparentNavbar);
   }, [dispatch, fixedNavbar]);
@@ -162,6 +162,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
     const data = await response.json();
     console.log("User balance status => ", data);
     setUserBalance(data.userBalance);
+    setAnnouncementDot(data.notification)
+    console.log(data.notification)
     // setNotification(data.notification);
     if (data.jwtStatus !== "Not Expired") {
       changeLoginStatusIfJwtExpires();
