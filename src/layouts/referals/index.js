@@ -60,9 +60,9 @@ const Referals = ({ brand, routes }) => {
     );
     console.log(response);
     const data = await response.json();
+    console.log(data);
     if (response) {
-      setPendingWithdrawalInfo(data.message);
-      console.log(data);
+      setPendingWithdrawalInfo(data.pendingWithdrawal);
     }
   }
 
@@ -303,7 +303,42 @@ const Referals = ({ brand, routes }) => {
               onClick={() => setPendingWithdrawal(!pendingWithdrawal)}
             ></i>
           </div>
-          {pendingWithdrawal && <p>{pendingWithdrawalInfo}</p>}
+          {pendingWithdrawal && 
+            <div className="pendingWithdrawalInfo">
+              <div>
+                <h6>Withdrawal Amount</h6>
+                <p>${pendingWithdrawalInfo.withdrawalAmount}</p>
+              </div>
+
+              <div>
+                <h6>Amount to Pay</h6>
+                <p>${pendingWithdrawalInfo.amountToPay}</p>
+              </div>
+
+              <div>
+                <h6>Withdrawable Amount</h6>
+                <p>${pendingWithdrawalInfo.totalWithdrawalMade}</p>
+              </div>
+
+              <div>
+                <h6>Amount to Pay</h6>
+                <p>${pendingWithdrawalInfo.amountToPay}</p>
+              </div>
+
+              <div>
+                <h6>Date Requested</h6>
+                <p>{pendingWithdrawalInfo && pendingWithdrawalInfo.createdDate.substring(0, 10)}</p>
+              </div>
+
+              <div className="pendingStatusInfo">
+                <h6>Status</h6>
+                <p> <span></span> {pendingWithdrawalInfo.status}</p>
+              </div>
+              
+            </div>
+          }
+          
+          
         </div>
 
         <div className="withdrawalHistory">
