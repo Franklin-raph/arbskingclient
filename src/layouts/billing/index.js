@@ -264,9 +264,8 @@ function Payment({ brand, routes }) {
               </p>
               <div className="whatsApplinkNumbers">
                 <p>
-                  Should you continue to encounter challenges while attempting to make a payment to
-                  the designated address independently, we offer you an alternative solution of
-                  engaging one of our esteemed verified vendors.<br />
+                  If you don't know how to make payment to the designated address independently, 
+                  we offer you an alternative solution of engaging one of our esteemed verified vendors.<br />
                   You can contact them via the WhatsApp contacts below
                 </p>
                 <div>

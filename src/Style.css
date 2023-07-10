@@ -1511,6 +1511,10 @@ input[type="checkbox"]{
   .whatsApplinkNumbers p{
     font-size: 14px;
   }
+
+  .announcements{
+    top: 13%;
+  }
 }
 
 @media screen and (max-width: 400px) {

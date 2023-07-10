@@ -76,6 +76,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const [loading, setLoading] = useState(false);
   const [announcements, setAnnouncments] = useState([]);
   const [isAnnouncementOpen, setIsAnnouncementOpen] = useState(false);
+  const [announcementDot, setAnnouncementDot] = useState(false);
   const { user } = useAuth();
   const { setUser } = useAuth();
 
@@ -112,6 +113,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
 
     getOpportunitiesViaWebSocket();
 
+    setAnnouncementDot(loggedInUser.userDetails.notification)
     // Remove event listener on cleanup
     return () => window.removeEventListener("scroll", handleTransparentNavbar);
   }, [dispatch, fixedNavbar]);
@@ -194,26 +196,26 @@ function DashboardNavbar({ absolute, light, isMini }) {
     return navigate("/dashboard/authentication/sign-in");
   };
 
-  async function checkNotification() {
+  function checkNotification() {
     localStorage.setItem("notify", "false");
     setShowNotificationMsg(false);
     setNotificationBell(false);
-    // setShowNotification(true);
-    // setNotification(!notification);
-    // const response = await fetch(
-    //   "https://sportbetpredict.onrender.com/api/account/change/notification",
-    //   {
-    //     method: "GET",
-    //     headers: {
-    //       Authorization: `Bearer ${loggedInUser.token}`,
-    //     },
-    //   }
-    // );
-    // const data = await response.json();
-    // setTimeout(() => {
-    //   setShowNotification(false);
-    // }, 3000);
-    // console.log(data);
+  }
+
+  async function changeNotificationStatus() {
+    setIsAnnouncementOpen(false)
+    setAnnouncementDot(false)
+    const response = await fetch(
+      "https://sportbetpredict.onrender.com/api/account/change/notification",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${loggedInUser.token}`,
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
   }
 
   function openAnnouncement() {
@@ -305,7 +307,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 {!notificationBell && <i className="fa-regular fa-bell"></i>}
                 <div className="announcement-phone-div">
                   <i className="fa-solid fa-bullhorn" onClick={openAnnouncement}></i>
-                  <span className="announcement-dot"></span>
+                  {announcementDot && <span className="announcement-dot"></span>}
                 </div>
                 <div>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -332,7 +334,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
                     <div>
                       {announcements.map((announcement) => (
                         <div className="announcement">
-                          <i class="fa-solid fa-xmark" onClick={() => setIsAnnouncementOpen(false)}></i>
+                          <i
+                            class="fa-solid fa-xmark"
+                            onClick={ changeNotificationStatus }
+                          ></i>
                           <p>{announcement.message}</p>
                           <div className="announcementTime">
                             <p></p>
