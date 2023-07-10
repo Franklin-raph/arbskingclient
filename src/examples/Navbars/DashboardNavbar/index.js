@@ -74,7 +74,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const [notificationBell, setNotificationBell] = useState(false);
   const [showNotificationMsg, setShowNotificationMsg] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [announcements, setAnnouncments] = useState([]);
+  const [isAnnouncementOpen, setIsAnnouncementOpen] = useState(false);
   const { user } = useAuth();
   const { setUser } = useAuth();
 
@@ -215,6 +216,26 @@ function DashboardNavbar({ absolute, light, isMini }) {
     // console.log(data);
   }
 
+  function openAnnouncement() {
+    setIsAnnouncementOpen(true);
+    getAnnouncement();
+  }
+
+  async function getAnnouncement() {
+    const response = await fetch(
+      "https://sportbetpredict.onrender.com/api/account/broadcast-message",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${loggedInUser.token}`,
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data.message);
+    if (response.ok) setAnnouncments(data.message);
+  }
+
   // Render the notifications menu
   const renderMenu = () => (
     <Menu
@@ -282,7 +303,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 )}
 
                 {!notificationBell && <i className="fa-regular fa-bell"></i>}
-                <i class="fa-solid fa-bullhorn"></i>
+                <div className="announcement-phone-div">
+                  <i className="fa-solid fa-bullhorn" onClick={openAnnouncement}></i>
+                  <span className="announcement-dot"></span>
+                </div>
                 <div>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                     <p
@@ -299,6 +323,37 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   </div>
                 </div>
               </div>
+
+              {isAnnouncementOpen && (
+                <div className="announcements">
+                  {announcements.length === 0 ? (
+                    <i className="fa-solid fa-spinner"></i>
+                  ) : (
+                    <div>
+                      {announcements.map((announcement) => (
+                        <div className="announcement">
+                          <i class="fa-solid fa-xmark" onClick={() => setIsAnnouncementOpen(false)}></i>
+                          <p>{announcement.message}</p>
+                          <div className="announcementTime">
+                            <p></p>
+                            <small>
+                              {Math.floor(
+                                (new Date() - new Date(announcement.messageDate)) /
+                                  (24 * 60 * 60 * 1000)
+                              ) === 1
+                                ? "1 day ago"
+                                : `${Math.floor(
+                                    (new Date() - new Date(announcement.messageDate)) /
+                                      (24 * 60 * 60 * 1000)
+                                  )} days ago`}
+                            </small>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </SoftBox>
 
             <SoftBox color={light ? "white" : "inherit"}>

@@ -649,6 +649,63 @@ select {
   }
 }
 
+.announcements{
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+  background-color: #ffff;
+  padding: 1.5rem;
+  position: fixed;
+  top: 13%;
+  right: 5%;
+  color: #000;
+  width: 65%;
+  /* position: relative; */
+}
+
+.fa-bullhorn{
+  cursor: pointer;
+}
+
+.announcement{
+  border-bottom: 1px solid #67748e52;
+}
+
+.announcement i{
+  position: absolute;
+  right: 3%;
+  top: 3%;
+}
+
+.announcement p{
+  margin-bottom: 0;
+  font-size: 13px;
+}
+
+.announcement small{
+  font-size: 12px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.announcement .announcementTime{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.announcement-phone-div{
+  position: relative;
+}
+
+.announcement-dot{
+  padding: 3px;
+  background-color: red;
+  display: inline-block;
+  border-radius: 50px;
+  position: absolute;
+  top: 5%;
+  right: 2%;
+}
+
 @media screen and (max-width:1199px){
 
   .fotter{
@@ -1251,6 +1308,15 @@ input[type="checkbox"]{
 
   .pendingAndHistory{
     grid-template-columns: 1fr;
+  }
+
+  .announcements{
+    left: 5%;
+    top: 22%;
+  }
+
+  .userAndBalance{
+    flex-direction: row-reverse;
   }
 }
 
