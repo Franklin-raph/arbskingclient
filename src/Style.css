@@ -1161,6 +1161,8 @@ input[type="checkbox"]{
   margin-bottom: 6rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: start;
+  justify-content: center;
   gap: 2rem;
 }
 
@@ -1205,6 +1207,9 @@ input[type="checkbox"]{
 }
 
 .pendingStatusInfo p{
+  border-radius: 6px;
+  background-color: #ffe03182;
+  padding: 5px 10px;
 }
 
 .positionedBookMakers p{

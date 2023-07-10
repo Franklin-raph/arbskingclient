@@ -83,11 +83,11 @@ const Referals = ({ brand, routes }) => {
         body: JSON.stringify({ withdrawalAmount: withdrawRequestAmount }),
       }
     );
-    console.log(response)
+    console.log(response);
     if (response) setWithdrawaRequestLoader(false);
     const data = await response.json();
-    if(!response.ok){
-      setWithdrawalRequestInfo(data.message)
+    if (!response.ok) {
+      setWithdrawalRequestInfo(data.message);
     }
     console.log(data);
   }
@@ -303,26 +303,26 @@ const Referals = ({ brand, routes }) => {
               onClick={() => setPendingWithdrawal(!pendingWithdrawal)}
             ></i>
           </div>
-          {pendingWithdrawal && 
+          {pendingWithdrawal && (
             <div className="pendingWithdrawalInfo">
               <div>
                 <h6>Withdrawal Amount</h6>
-                <p>${pendingWithdrawalInfo.withdrawalAmount}</p>
+                <p>${pendingWithdrawalInfo && pendingWithdrawalInfo.withdrawalAmount}</p>
               </div>
 
               <div>
                 <h6>Amount to Pay</h6>
-                <p>${pendingWithdrawalInfo.amountToPay}</p>
+                <p>${pendingWithdrawalInfo && pendingWithdrawalInfo.amountToPay}</p>
               </div>
 
               <div>
                 <h6>Withdrawable Amount</h6>
-                <p>${pendingWithdrawalInfo.totalWithdrawalMade}</p>
+                <p>${pendingWithdrawalInfo && pendingWithdrawalInfo.totalWithdrawalMade}</p>
               </div>
 
               <div>
                 <h6>Amount to Pay</h6>
-                <p>${pendingWithdrawalInfo.amountToPay}</p>
+                <p>${pendingWithdrawalInfo && pendingWithdrawalInfo.amountToPay}</p>
               </div>
 
               <div>
@@ -332,13 +332,13 @@ const Referals = ({ brand, routes }) => {
 
               <div className="pendingStatusInfo">
                 <h6>Status</h6>
-                <p> <span></span> {pendingWithdrawalInfo.status}</p>
+                <p>
+                  {" "}
+                  <span></span> {pendingWithdrawalInfo && pendingWithdrawalInfo.status}
+                </p>
               </div>
-              
             </div>
-          }
-          
-          
+          )}
         </div>
 
         <div className="withdrawalHistory">
