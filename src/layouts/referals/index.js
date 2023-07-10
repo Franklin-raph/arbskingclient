@@ -149,7 +149,7 @@ const Referals = ({ brand, routes }) => {
               onClick={() => setIsWithdrawalModalOpen(!isWithdrawalModalOpen)}
             ></i>
             In order to initiate a withdrawal, it is required that you possess a minimum balance of
-            $10 in your earned referral bonus, taking into account a withdrawal fee of 10%.
+            $10 in your withdrawable balance, taking into account a withdrawal fee of 10%.
           </p>
         </div>
       )}
