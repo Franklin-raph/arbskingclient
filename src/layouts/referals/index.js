@@ -61,7 +61,7 @@ const Referals = ({ brand, routes }) => {
     );
     console.log(response);
     const data = await response.json();
-    console.log(data.withdrawHistory);
+    console.log(data);
     if (response) {
       setPendingWithdrawalInfo(data.pendingWithdrawal);
       setWithdrawalHistoryInfo(data.withdrawHistory)
@@ -318,14 +318,14 @@ const Referals = ({ brand, routes }) => {
               </div>
 
               <div>
-                <h6>Total Withdrawable Amount</h6>
+                <h6>Total Withdrawn Amount</h6>
                 <p>${pendingWithdrawalInfo && pendingWithdrawalInfo.totalWithdrawalMade}</p>
               </div>
 
-              <div>
+              {/* <div>
                 <h6>Amount to Pay</h6>
                 <p>${pendingWithdrawalInfo && pendingWithdrawalInfo.amountToPay}</p>
-              </div>
+              </div> */}
 
               <div>
                 <h6>Date Requested</h6>
