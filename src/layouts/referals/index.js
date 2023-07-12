@@ -15,6 +15,7 @@ const Referals = ({ brand, routes }) => {
   const [referralBonusLost, setReferralBonusLost] = useState(false);
   const [pendingWithdrawal, setPendingWithdrawal] = useState(false);
   const [withdrawalHistory, setWithdrawalHistory] = useState(false);
+  const [withdrawalHistoryInfo, setWithdrawalHistoryInfo] = useState([]);
   const [pendingWithdrawalInfo, setPendingWithdrawalInfo] = useState("");
   const [withdrawalRequestInfo, setWithdrawalRequestInfo] = useState("");
   const [withdrawRequestAmount, setWithdrawaRequestAmount] = useState(0);
@@ -60,9 +61,10 @@ const Referals = ({ brand, routes }) => {
     );
     console.log(response);
     const data = await response.json();
-    console.log(data);
+    console.log(data.withdrawHistory);
     if (response) {
       setPendingWithdrawalInfo(data.pendingWithdrawal);
+      setWithdrawalHistoryInfo(data.withdrawHistory)
     }
   }
 
@@ -296,7 +298,7 @@ const Referals = ({ brand, routes }) => {
 
       <div className="pendingAndHistory">
         <div className="pendingWithdrawal">
-          <div>
+          <div className="header">
             <h6>Pending Withdrawals</h6>
             <i
               class="fa-solid fa-angle-down"
@@ -316,7 +318,7 @@ const Referals = ({ brand, routes }) => {
               </div>
 
               <div>
-                <h6>Withdrawable Amount</h6>
+                <h6>Total Withdrawable Amount</h6>
                 <p>${pendingWithdrawalInfo && pendingWithdrawalInfo.totalWithdrawalMade}</p>
               </div>
 
@@ -333,7 +335,6 @@ const Referals = ({ brand, routes }) => {
               <div className="pendingStatusInfo">
                 <h6>Status</h6>
                 <p>
-                  {" "}
                   <span></span> {pendingWithdrawalInfo && pendingWithdrawalInfo.status}
                 </p>
               </div>
@@ -342,13 +343,40 @@ const Referals = ({ brand, routes }) => {
         </div>
 
         <div className="withdrawalHistory">
-          <div>
+          <div className="header">
             <h6>Withdrawal History</h6>
             <i
               class="fa-solid fa-angle-down"
               onClick={() => setWithdrawalHistory(!withdrawalHistory)}
             ></i>
           </div>
+          {withdrawalHistory && 
+          <div className="withdrawalHistoryInfo">
+              {withdrawalHistoryInfo && withdrawalHistoryInfo.map(withdrawHistory => (
+                <div id="withdrawHistory">
+                  <div>
+                    <h6>Amount Requested</h6>
+                    <p>${withdrawHistory.amountRequested}</p>
+                  </div>
+
+                  <div>
+                    <h6>Amount Paid</h6>
+                    <p>${withdrawHistory.amountPaid}</p>
+                  </div>
+
+                  <div>
+                    <h6>Date Paid</h6>
+                    <p>{withdrawHistory.paidDate.substring(0, 10)}</p>
+                  </div>
+
+                  <div>
+                    <h6>Status</h6>
+                    <p className="paid">{withdrawHistory.status}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            }
           <p>{}</p>
         </div>
       </div>

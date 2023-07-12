@@ -658,6 +658,9 @@ select {
   right: 5%;
   color: #000;
   width: 65%;
+  height: 30%;
+  z-index: 999;
+  overflow-y: scroll;
   /* position: relative; */
 }
 
@@ -1166,7 +1169,7 @@ input[type="checkbox"]{
   gap: 2rem;
 }
 
-.pendingWithdrawal div, .withdrawalHistory div{
+.pendingWithdrawal .header, .withdrawalHistory .header{
   display: flex;
   gap: 4rem;
   align-items: center;
@@ -1184,10 +1187,25 @@ input[type="checkbox"]{
   border-radius: 5px;
 }
 
-.pendingWithdrawalInfo{
+.pendingWithdrawalInfo, #withdrawHistory{
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
   gap: 10px !important;
+}
+
+#withdrawHistory{
+  background-color: #eee;
+  /* background-color: #1ac88829; */
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+#withdrawHistory .paid{
+  background-color: #1ac88829;
+  padding: 1px 10px;
+  border-radius: 3px;
+  text-transform: capitalize;
 }
 
 .pendingWithdrawalInfo div{
@@ -1196,11 +1214,11 @@ input[type="checkbox"]{
   margin-bottom: 0 !important;
 }
 
-.pendingWithdrawalInfo h6{
+.pendingWithdrawalInfo h6, #withdrawHistory h6{
   font-size: 15px;
   margin-bottom: 0 !important;
 }
-.pendingWithdrawalInfo p{
+.pendingWithdrawalInfo p, #withdrawHistory p{
   font-weight: bold;
   margin-bottom: 0;
   font-size: 14px;
@@ -1209,7 +1227,8 @@ input[type="checkbox"]{
 .pendingStatusInfo p{
   border-radius: 6px;
   background-color: #ffe03182;
-  padding: 5px 10px;
+  padding: 3px 10px;
+  text-transform: capitalize;
 }
 
 .positionedBookMakers p{
