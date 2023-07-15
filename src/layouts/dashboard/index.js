@@ -58,6 +58,7 @@ function Dashboard({ brand, routes }) {
   const [arbsAvg, setArbsAvg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [marketInfo, setMarketInfo] = useState(false);
+  const [noSubModal, setNoSubModal] = useState(false);
   const [bookmarkers, setBookmarkers] = useState();
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectedItemId, setSelectedItemId] = useState(null);
@@ -292,6 +293,10 @@ function Dashboard({ brand, routes }) {
     setMarketInfo(false);
   }, 7000);
 
+  function openNoSubMsg(){
+    setNoSubModal(!noSubModal)
+  }
+
   return (
     <DashboardLayout>
       <Sidenav brand={brand} brandName="Arbsking" routes={routes} />
@@ -358,6 +363,16 @@ function Dashboard({ brand, routes }) {
             )}
           </div>
 
+          {noSubModal && 
+            <div className="noSubModalBg">
+              <div className="noSubModalMsg">
+                  <i className="fa-solid fa-xmark" onClick={() => setNoSubModal(!noSubModal)}></i>
+                  <p>You do not have an active subscription</p>
+                  <button onClick={() => navigate("/dashboard/payments")}>Purchase a sub</button>
+              </div>
+            </div>
+          }
+
           {arbs === null ? (
             <p className="noSubMsg">
               {arbsInvalid &&
@@ -395,8 +410,8 @@ function Dashboard({ brand, routes }) {
                           <p className="profit">{arb.profit}%</p>
                         </div>
                         <div>
-                          <Link to="/dashboard/arbitragecalculator" state={{ value: arb.odds, bms: arb.bookmakers }}>
-                            <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
+                          <Link to="#">
+                            <i className="fa-solid fa-calculator" onClick={openNoSubMsg}></i>
                           </Link>
                         </div>
                       </div>
@@ -471,7 +486,7 @@ function Dashboard({ brand, routes }) {
                         {arb &&
                           arb.bookmakersLink.split(",").map((bookmaker, index) => (
                             <p key={index} style={{ display: "block" }}>
-                              <a href={`${bookmaker}`} target="_blank">
+                              <a href="#" onClick={openNoSubMsg}>
                                 <i className="fa-solid fa-up-right-from-square"></i>
                               </a>
                             </p>
