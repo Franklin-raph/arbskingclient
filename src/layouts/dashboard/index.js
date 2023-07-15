@@ -88,7 +88,19 @@ function Dashboard({ brand, routes }) {
       setIsLoading(false);
     }
     if (response.status === 401) {
-      setArbsInvalid("You do not have an active subscription");
+      setArbsInvalid([{
+        age : "8h",
+        bookmakers : "Pari​match, 18​Bet, 18​Bet",
+        bookmakersLink : "https://en.surebet.com/nav/bookie/parimatch, https://en.surebet.com/nav/bookie/18bet, https://en.surebet.com/nav/bookie/18bet",
+        league : "Macao - Division 1",
+        marketExplaination : "Total over 6 - goals, Total under 6.5 - goals, Total under 5.5 - goals",
+        markets : "Over 6, Under 6.5, Under 5.5",
+        matchTime : "16/07, 10:00",
+        odds : "2.12, 3.00, 5.00",
+        profit : 34.7,
+        teams : "CPK FC – Sporting Macau",
+        _id : "64b2952fc117be4b9d02c0e4",
+      }]);
       setArbs(null);
     }
 
@@ -347,7 +359,128 @@ function Dashboard({ brand, routes }) {
           </div>
 
           {arbs === null ? (
-            <p className="noSubMsg">{arbsInvalid}</p>
+            <p className="noSubMsg">
+              {arbsInvalid &&
+                arbsInvalid.map((arb, index) => (
+                  <div className="matchCard" key={index}>
+                    <div className="clubCard">
+                      <div className="teamAndLeague">
+                        <div className="clubLogoAndBetCompany">
+                          <div className="singleClub">
+                            <i className="fa-regular fa-futbol fs-5"></i>
+                            <p style={{ fontWeight: "bold" }}>
+                              {arb.teams.split(" – ").map((team) => team.trim())[0]}
+                            </p>
+                          </div>
+                          <div className="betPatform mx-4">
+                            <p>Vs</p>
+                          </div>
+                          <div className="singleClub">
+                            <i className="fa-regular fa-futbol fs-5"></i>
+                            <p style={{ fontWeight: "bold" }}>
+                              {arb.teams.split(" – ").map((team) => team.trim())[1]}
+                            </p>
+                          </div>
+                        </div>
+                        <small className="league">{arb.league}</small>
+                      </div>
+
+                      <div className="time-market-calc">
+                        <div className="time">
+                          <i className="fa-regular fa-clock"></i>
+                          <p>{arb.matchTime}</p>
+                        </div>
+
+                        <div>
+                          <p className="profit">{arb.profit}%</p>
+                        </div>
+                        <div>
+                          <Link to="/dashboard/arbitragecalculator" state={{ value: arb.odds, bms: arb.bookmakers }}>
+                            <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="arbs">
+                      <div style={{ paddingBottom: "1rem" }}>
+                        <p style={{ fontWeight: "bold", fontSize: "17px" }} className="desktop">
+                          Book Maker
+                        </p>
+                        <p style={{ fontWeight: "bold", fontSize: "17px" }} className="mobile">
+                          BM
+                        </p>
+                        {arb &&
+                          arb.bookmakers.split(",").map((bookmaker, index) => (
+                            <p key={index} style={{ display: "block" }}>
+                              {bookmaker}
+                            </p>
+                          ))}
+                      </div>
+                      <div>
+                        <p
+                          style={{
+                            fontWeight: "bold",
+                            fontSize: "17px",
+                            display: "flex",
+                            gap: "3px",
+                            alignItems: "center",
+                            textAlign: "center",
+                          }}
+                        >
+                          Market
+                          <i
+                            className="fa-solid fa-circle-info"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => clickedMarketInfo(arb._id)}
+                          ></i>
+                        </p>
+                        {arb &&
+                          arb.markets.split(",").map((market, index) => (
+                            <p className="text-muted" key={index}>
+                              {market}
+                            </p>
+                          ))}
+                      </div>
+
+                      {marketInfo && (
+                        <div className="marketInfo">
+                          {arb &&
+                            arb.marketExplaination
+                              .split(",")
+                              .map(
+                                (market, index) =>
+                                  arb._id === selectedItemId && <p key={index}>{market}</p>
+                              )}
+                        </div>
+                      )}
+
+                      <div>
+                        <p style={{ fontWeight: "bold", fontSize: "17px" }}>Odds</p>
+                        {arb && arb.odds.split(",").map((odd, index) => <p key={index}>{odd}</p>)}
+                      </div>
+                      <div>
+                        <p
+                          style={{ fontWeight: "bold", fontSize: "17px" }}
+                          className="go-to-mobile"
+                        >
+                          .
+                        </p>
+                        <p style={{ fontWeight: "bold", fontSize: "17px" }} className="go-to">
+                          Go to
+                        </p>
+                        {arb &&
+                          arb.bookmakersLink.split(",").map((bookmaker, index) => (
+                            <p key={index} style={{ display: "block" }}>
+                              <a href={`${bookmaker}`} target="_blank">
+                                <i className="fa-solid fa-up-right-from-square"></i>
+                              </a>
+                            </p>
+                          ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </p>
           ) : (
             <>
               {arbs &&
