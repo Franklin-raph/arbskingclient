@@ -1640,3 +1640,8 @@ input[type="checkbox"]{
   }
 }
 
+.favouriteBookMakers input[type="text"]{
+  outline: none;
+  border: 1px solid #344767;
+  padding: 3px 8px;
+}

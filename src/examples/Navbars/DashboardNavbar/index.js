@@ -183,7 +183,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
       }
     );
     const data = await response.json();
-    if (response) localStorage.clear();
+    console.log(data)
+    if (response.ok) localStorage.clear();
   }
 
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);

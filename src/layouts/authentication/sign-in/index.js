@@ -70,7 +70,7 @@ function SignIn() {
         },
       })
       const data = await response.json()
-      if(response) localStorage.clear();
+      if(response.ok) localStorage.clear();
       // console.log(response, data)
     }
   }
@@ -86,6 +86,7 @@ function SignIn() {
 
   const submitFormData = async (e) => {
     e.preventDefault();
+    if(formData.username.length <= 0 || formData.password.length <= 0) return setError("Please fill in all fields")
     setIsLoading(true);
     const response = await fetch("https://sportbetpredict.onrender.com/api/login", {
       method: "POST",
@@ -200,6 +201,9 @@ function SignIn() {
               <SoftButton variant="gradient" color="info" onClick={submitFormData} fullWidth>
                 sign in
               </SoftButton>
+              <SoftBox mt={1} textAlign="center">
+                <a href="/dashboard/authentication/trouble-logging-in" style={{ fontSize:"14px", textAlign:"center" }}>Trouble Logging in?</a>
+              </SoftBox>
             </SoftBox>
             <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">

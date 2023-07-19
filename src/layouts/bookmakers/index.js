@@ -58,6 +58,7 @@ function Overview({ brand, routes }) {
     "Bodog (EN)",
     "Bodog (EU)",
     "Bwin",
+    "Cash​point",
     "Cloud​Bet",
     "Cool​Bet",
     "Coral",
@@ -78,6 +79,7 @@ function Overview({ brand, routes }) {
     "Olimp",
     "Pari​match",
     "Pari​match (CY)",
+    "Pin​nacle",
     "Rollbit",
     "Sbo​Bet",
     "Sbo​bet (e​Sport IM)",
@@ -99,73 +101,19 @@ function Overview({ brand, routes }) {
     "SportyBet",
   ]);
 
-  const bookMakersFilterArray = [
-    "18Bet",
-    "1Win",
-    "22Bet",
-    "3et",
-    "888sport",
-    "Betano",
-    "Betano (NG)",
-    "Betboro",
-    "Betsafe",
-    "Betsson",
-    "Betsson (ES)",
-    "BetVictor",
-    "Betfirst (BE)",
-    "BlueChip",
-    "Bodog (EN)",
-    "Bodog (EU)",
-    "Bwin",
-    "CloudBet",
-    "CoolBet",
-    "Coral",
-    "Dafabet (Dafa Sports)",
-    "Dafabet (OW)",
-    "EfBet",
-    "FavBet",
-    "Germania (HR)",
-    "GGBet",
-    "Holland Casino",
-    "iForBet",
-    " Jacks",
-    "KTO",
-    "Marathon",
-    "Matchbook",
-    "MelBet",
-    "Mozzart",
-    "Olimp",
-    "Parmatch",
-    "Parimatch (CY)",
-    "Rollbit",
-    "SboBet",
-    "Sbobet (eSport IM)",
-    "Stake",
-    "Suprabets",
-    "TempoBet",
-    "TitanBet",
-    "William Hill",
-    "Winmasters",
-    "WWin",
-    "Zenit",
-    "1xBet",
-    "BetKing",
-    "Bet9ja",
-    "BetPawa",
-    "Betbonanza",
-    "MerryBet",
-    "NairaBet",
-    "SportyBet",
-  ];
-
   const [favouriteBookMakers, setFavouriteBookMakers] = useState([]);
   const [searchWord, setSearchWord] = useState("");
+
+  const [bookmaker, setBookmaker] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   useEffect(() => {
     if (!loggedInUser) {
       navigate("/dashboard/authentication/sign-in");
     }
     getFavouriteBookMakers();
+    getBookMakerDetails()
   }, []);
 
   const handleCheckboxChange = (event) => {
@@ -235,6 +183,32 @@ function Overview({ brand, routes }) {
     }
   }
 
+  async function addBookMakerDetails(){
+    console.log({email:email, password:password, bookmaker:bookmaker})
+    const response = await fetch("https://sportbetpredict.onrender.com/api/account/add/bookmaker-details", {
+      method:"POST",
+      headers: {
+        "Content-type":"application/json",
+        Authorization: `Bearer ${loggedInUser.token}`,
+      },
+      body: JSON.stringify({email:email, password:password, bookmaker:bookmaker})
+    })
+    const data = await response.json()
+    console.log(data)
+  }
+
+  async function getBookMakerDetails(){
+    const response = await fetch("https://sportbetpredict.onrender.com/api/account/display/bookmaker-details", {
+      method:"POST",
+      headers: {
+        "Content-type":"application/json",
+        Authorization: `Bearer ${loggedInUser.token}`,
+      }
+    })
+    const data = await response.json()
+    console.log(data)
+  }
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -292,6 +266,29 @@ function Overview({ brand, routes }) {
             favouriteBookMakers.map((favouriteBookMaker) => <p>{favouriteBookMaker}</p>)}
         </div>
       </div>
+      
+      {/* <div className="favouriteBookMakers">
+        <h6 style={{ marginBottom: "0" }}>Add BookMaker Details</h6>
+        <button className="chooseBookMakers" style={{ marginTop:"1rem", marginBottom:"0" }}>
+          <i className="fa-solid fa-plus"></i> Add BookMaker
+        </button>
+        <div style={{ marginTop: "1rem", display:"flex", gap:"10px" }}>
+          <div>
+            <label style={{ display:"block" }}>Bookmaker</label>
+            <input type="text" placeholder="Bookmaker" onChange={(e) => setBookmaker(e.target.value)}/>
+          </div>
+          <div>
+            <label style={{ display:"block" }}>Username</label>
+            <input type="text" placeholder="username" onChange={(e) => setEmail(e.target.value)}/>
+          </div>
+          <div>
+            <label style={{ display:"block" }}>Password</label>
+            <input type="text" placeholder="********" onChange={(e) => setPassword(e.target.value)}/>
+          </div>
+        </div>
+          <button onClick={addBookMakerDetails} className="chooseBookMakers" style={{ marginTop:"10px" }}>Submit</button>
+      </div> */}
+
       <div className="fotter">
         <Footer />
       </div>

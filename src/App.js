@@ -36,6 +36,7 @@ import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "contex
 import brand from "assets/images/logo-ct.png";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import TroubleLoggingInPage from "layouts/authentication/trouble-logging-in";
 import ReferalSignUp from "layouts/authentication/sign-up-referal";
 import Dashboard from "layouts/dashboard";
 import Overview from "layouts/profile";
@@ -55,6 +56,7 @@ export default function App() {
       <Routes>
         <Route path="/dashboard/authentication/sign-in" element={<SignIn />} />
         <Route path="/dashboard/authentication/sign-up" element={<SignUp />} />
+        <Route path="/dashboard/authentication/trouble-logging-in" element={<TroubleLoggingInPage />} />
         <Route
           path="/dashboard/authentication/sign-up/register-refered/:id"
           element={<ReferalSignUp />}

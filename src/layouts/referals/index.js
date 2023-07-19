@@ -155,6 +155,7 @@ const Referals = ({ brand, routes }) => {
           </p>
         </div>
       )}
+      <p style={{ fontSize:"13px", padding:"0 20px" }}>Our referral program rewards your support and loyalty. When you refer someone to our services and they subscribe, you receive 10% of their subscription fee. Simply share your unique referral link, and when your referred person subscribes, you earn your commission. It's an ongoing program, so you can continue to earn rewards with each successful referral. Thank you for being a valued member of our community.</p>
       <div className="referralHeader">
         <h1>My Referral Info</h1>
         {referalData && (
