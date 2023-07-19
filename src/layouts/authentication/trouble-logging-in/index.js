@@ -64,7 +64,7 @@ const TroubleLoggingInPage = () => {
           <div className="passwordResetSuccess">
             <i className="fa-solid fa-check"></i>
             <p>{successMsg}</p>
-            <a href="/authentication/sign-in">Continue to Login</a>
+            <a href="/dashboard/authentication/sign-in">Continue to Login</a>
           </div>
         )}
         {errorMsg && (
@@ -73,16 +73,22 @@ const TroubleLoggingInPage = () => {
           </div>
         )}
         <p>Trouble Logging In?</p>
+       <div>
+        <label>Email</label>
         <input
           type="text"
           onChange={(e) => setEmail(e.target.value)}
           placeholder="arbsking@gmail.com"
         />
-        <input
+       </div>
+        <div>
+          <label>Password</label>
+          <input
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
+        </div>
         {!loading ? (
           <button className="resetPasswordBtn" onClick={(e) => resetPassword()}>
             Submit
