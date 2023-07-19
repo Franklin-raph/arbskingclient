@@ -73,22 +73,22 @@ const TroubleLoggingInPage = () => {
           </div>
         )}
         <p>Trouble Logging In?</p>
-       <div>
-        <label>Email</label>
+       {/* <div>
+        <label style={{ display:"block" }}>Email</label> */}
         <input
           type="text"
           onChange={(e) => setEmail(e.target.value)}
           placeholder="arbsking@gmail.com"
         />
-       </div>
+       {/* </div>
         <div>
-          <label>Password</label>
+          <label style={{ display:"block" }}>Password</label> */}
           <input
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        </div>
+        {/* </div> */}
         {!loading ? (
           <button className="resetPasswordBtn" onClick={(e) => resetPassword()}>
             Submit
