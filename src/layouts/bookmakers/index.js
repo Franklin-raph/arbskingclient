@@ -104,9 +104,13 @@ function Overview({ brand, routes }) {
   const [favouriteBookMakers, setFavouriteBookMakers] = useState([]);
   const [searchWord, setSearchWord] = useState("");
 
+  const [bookmakerError, setBookmakerError] = useState("")
   const [bookmaker, setBookmaker] = useState("")
-  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [bookiesLoading, setBookiesLoading] = useState(false);
+  const [bookiesDetails, setBookiesDetails] = useState([])
+  // const [bookmakerDetailsDivsInputs, setBookmakerDetailsDivsInputs] = useState([]);
 
   useEffect(() => {
     if (!loggedInUser) {
@@ -183,18 +187,43 @@ function Overview({ brand, routes }) {
     }
   }
 
+  function addNewBookMakerDetailDiv(){
+    if(bookiesDetails.length === 5){
+      setBookmakerError("You can only add maximum of 5 bookmaker details at a time")
+      return
+    }else if(bookmaker.length === 0 || username.length === 0 || password.length === 0){
+      setBookmakerError("Please fill in all fields")
+      return
+    }else{
+      bookiesDetails.push({bookmaker:bookmaker, username:username, password:password})
+      setBookiesDetails([...bookiesDetails])
+      setBookmaker("")
+      setUsername("")
+      setPassword("")
+    }
+    console.log(bookiesDetails)
+  }
+
+  useEffect(() =>{
+    setTimeout(() => {
+      setBookmakerError("")
+    },5000)
+  },[bookmakerError])
+
   async function addBookMakerDetails(){
-    console.log({email:email, password:password, bookmaker:bookmaker})
+    console.log(JSON.stringify({bookiesDetails:bookiesDetails}))
+    setBookiesLoading(true)
     const response = await fetch("https://sportbetpredict.onrender.com/api/account/add/bookmaker-details", {
       method:"POST",
       headers: {
         "Content-type":"application/json",
         Authorization: `Bearer ${loggedInUser.token}`,
       },
-      body: JSON.stringify({email:email, password:password, bookmaker:bookmaker})
+      body: JSON.stringify({bookiesDetails:bookiesDetails})
     })
     const data = await response.json()
-    console.log(data)
+    if(response) setBookiesLoading(false)
+    console.log(response, data)
   }
 
   async function getBookMakerDetails(){
@@ -269,10 +298,70 @@ function Overview({ brand, routes }) {
       
       {/* <div className="favouriteBookMakers">
         <h6 style={{ marginBottom: "0" }}>Add BookMaker Details</h6>
-        <button className="chooseBookMakers" style={{ marginTop:"1rem", marginBottom:"0" }}>
-          <i className="fa-solid fa-plus"></i> Add BookMaker
+        
+        <div>
+          <div className="addBookmakerDetailsInputDiv">
+                <div>
+                  <label style={{ display:"block" }}>Bookmaker</label>
+                  <input type="text" placeholder="Bookmaker" value={bookmaker} onChange={(e) => setBookmaker(e.target.value)}/>
+                </div>
+                <div>
+                  <label style={{ display:"block" }}>Username</label>
+                  <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                </div>
+                <div>
+                  <label style={{ display:"block" }}>Password</label>
+                  <input type="text" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                </div>
+                <button onClick={addNewBookMakerDetailDiv} className="chooseBookMakers" style={{ marginTop:"1rem", marginBottom:"0" }}>
+                  <i className="fa-solid fa-plus"></i> Add BookMaker
+                </button>
+            </div>
+        </div>
+
+        <div className="addedBookMakersDivContainer">
+            {bookmakerError && <p style={{ textAlign:"center", border:"1px solid #f5c6cb", borderRadius:"5px", backgroundColor:"#f8d7da", padding:"7px", color:"#721c24" }}>{bookmakerError}</p>}
+          {bookiesDetails.map((bookiesDetail, index) =>(
+            <div className="addedBookMakersDiv" style={{ }}>
+              <div>
+                <h6>BookMaker</h6>
+                <p style={{ marginBottom:"0" }}>{bookiesDetail.bookmaker}</p>
+              </div>
+              <div>
+                <h6>Username</h6>
+                <p style={{ marginBottom:"0" }}>{bookiesDetail.username}</p>
+              </div>
+              <div>
+                <h6>Password</h6>
+                <p style={{ marginBottom:"0" }}>{bookiesDetail.password}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {!bookiesLoading ? (
+        <>
+          {bookiesDetails && bookiesDetails.length > 0 && <button onClick={addBookMakerDetails} className="chooseBookMakers" style={{ marginTop:"10px", marginBottom:"5rem" }}>Submit</button>}
+        </>
+      ) : (
+        <button className="chooseBookMakers">
+          <i className="fa-solid fa-spinner"></i> Submit
         </button>
-        <div style={{ marginTop: "1rem", display:"flex", gap:"10px" }}>
+      )}
+        
+          
+      </div> */}
+
+      <div className="fotter">
+        <Footer />
+      </div>
+    </DashboardLayout>
+  );
+}
+
+export default Overview;
+
+{/* <div style={{ marginTop: "1rem", display:"flex", gap:"10px" }}>
           <div>
             <label style={{ display:"block" }}>Bookmaker</label>
             <input type="text" placeholder="Bookmaker" onChange={(e) => setBookmaker(e.target.value)}/>
@@ -285,15 +374,4 @@ function Overview({ brand, routes }) {
             <label style={{ display:"block" }}>Password</label>
             <input type="text" placeholder="********" onChange={(e) => setPassword(e.target.value)}/>
           </div>
-        </div>
-          <button onClick={addBookMakerDetails} className="chooseBookMakers" style={{ marginTop:"10px" }}>Submit</button>
-      </div> */}
-
-      <div className="fotter">
-        <Footer />
-      </div>
-    </DashboardLayout>
-  );
-}
-
-export default Overview;
+        </div> */}

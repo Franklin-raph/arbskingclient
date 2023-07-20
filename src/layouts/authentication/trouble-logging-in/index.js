@@ -88,6 +88,7 @@ const TroubleLoggingInPage = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
+        
         {/* </div> */}
         {!loading ? (
           <button className="resetPasswordBtn" onClick={(e) => resetPassword()}>
