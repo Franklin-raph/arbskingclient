@@ -157,7 +157,7 @@ function Overview({ brand, routes }) {
               <i className="fa-solid fa-user"></i>
               <p>
                 {loggedInUser && loggedInUser.userDetails.firstname}{" "}
-                {loggedInUser && loggedInUser.userDetails.referralAgent && (
+                {loggedInUser && loggedInUser.userDetails.isVendor && (
                   <>
                     <i
                       class="fa-solid fa-circle-check"
@@ -166,7 +166,7 @@ function Overview({ brand, routes }) {
                       style={{ marginLeft: "5px" }}
                     ></i>
                     {hoverState && (
-                      <span style={{ fontWeight: "normal" }}>Verified Referal Agent</span>
+                      <span style={{ fontWeight: "normal" }}>Verified Vendor</span>
                     )}
                   </>
                 )}

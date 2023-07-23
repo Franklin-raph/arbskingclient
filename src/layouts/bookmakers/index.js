@@ -105,11 +105,19 @@ function Overview({ brand, routes }) {
   const [searchWord, setSearchWord] = useState("");
 
   const [bookmakerError, setBookmakerError] = useState("")
+  const [bookmakerSuccess, setBookmakerSuccess] = useState("")
   const [bookmaker, setBookmaker] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [bookiesLoading, setBookiesLoading] = useState(false);
+  const [openPreviousBookMakerDetails, setOpenPreviousBookMakerDetails] = useState(true);
   const [bookiesDetails, setBookiesDetails] = useState([])
+  const [previousBookmakersArray, setPreviousBookmakersArray] = useState([])
+  const [bookMakersArrayToShow, setBookMakersArrayToShow] = useState([])
+  const [userArbsKingId, setUserArbsKingId] = useState("")
+  const [searchedUserBookies, setSearchedUserBookies] = useState([])
+  const [searchedUserBookiesError, setSearchedUserBookiesError] = useState("")
+  const [isSearchedUserBookies, setIsSearchedUserBookies] = useState(true)
   // const [bookmakerDetailsDivsInputs, setBookmakerDetailsDivsInputs] = useState([]);
 
   useEffect(() => {
@@ -223,6 +231,12 @@ function Overview({ brand, routes }) {
     })
     const data = await response.json()
     if(response) setBookiesLoading(false)
+    if(response.ok){
+      setBookmakerSuccess(data.message)
+    }
+    if(!response.ok){
+      setBookmakerError(data.message)
+    }
     console.log(response, data)
   }
 
@@ -234,8 +248,50 @@ function Overview({ brand, routes }) {
         Authorization: `Bearer ${loggedInUser.token}`,
       }
     })
+    console.log(response)
     const data = await response.json()
     console.log(data)
+    if(response.ok){
+      setPreviousBookmakersArray(data.message.bookiesDetails)
+      if(data.message.bookiesDetails === null || data.message.bookiesDetails.length === 0){
+        setBookMakersArrayToShow(bookMakersArray)
+        return
+      }else{
+        const bookMakersToRemove = new Set(data.message.bookiesDetails.map(item => item.bookmaker));
+        const bookMakersToShow = bookMakersArray.filter(item => !bookMakersToRemove.has(item));
+        setBookMakersArrayToShow(bookMakersToShow)
+        console.log(bookMakersToShow)
+      }
+    }
+  }
+
+  async function searchUserBookMarkerDetails() {
+    console.log("fetching....")
+    const response = await fetch("https://sportbetpredict.onrender.com/api/account/vendor/search-user", {
+      method:"POST",
+      headers: {
+        "Content-type":"application/json",
+        Authorization: `Bearer ${loggedInUser.token}`,
+      },
+      body: JSON.stringify({userArbsKingId:userArbsKingId})
+    })
+    const data = await response.json()
+    console.log(response)
+    console.log(data)
+    if(response) console.log("Data gotten....")
+    if(!response.ok) {
+      setSearchedUserBookiesError(data.message)
+      setTimeout(() => {
+        setSearchedUserBookiesError("")
+      },3000)
+      return
+    }
+
+    if(response.ok) {
+      setSearchedUserBookies(data.message.userBookieDetails.bookiesDetails)
+      return
+    }
+
   }
 
   return (
@@ -296,14 +352,20 @@ function Overview({ brand, routes }) {
         </div>
       </div>
       
-      {/* <div className="favouriteBookMakers">
+      <div className="favouriteBookMakers">
         <h6 style={{ marginBottom: "0" }}>Add BookMaker Details</h6>
         
         <div>
           <div className="addBookmakerDetailsInputDiv">
                 <div>
                   <label style={{ display:"block" }}>Bookmaker</label>
-                  <input type="text" placeholder="Bookmaker" value={bookmaker} onChange={(e) => setBookmaker(e.target.value)}/>
+                  <select onChange={e => setBookmaker(e.target.value)} style={{ border:"1px solid #344767", padding:"3px 0", outline:"none" }}>
+                    <option>Select a bookmaker</option>
+                    {bookMakersArrayToShow && bookMakersArrayToShow.map(bookmaker => (
+                      <option value={bookmaker}>{bookmaker}</option>
+                    ))}
+                  </select>
+                  {/* <input type="text" placeholder="Bookmaker" value={bookmaker} onChange={(e) => setBookmaker(e.target.value)}/> */}
                 </div>
                 <div>
                   <label style={{ display:"block" }}>Username</label>
@@ -321,8 +383,10 @@ function Overview({ brand, routes }) {
 
         <div className="addedBookMakersDivContainer">
             {bookmakerError && <p style={{ textAlign:"center", border:"1px solid #f5c6cb", borderRadius:"5px", backgroundColor:"#f8d7da", padding:"7px", color:"#721c24" }}>{bookmakerError}</p>}
-          {bookiesDetails.map((bookiesDetail, index) =>(
-            <div className="addedBookMakersDiv" style={{ }}>
+            {bookmakerSuccess && <p style={{ textAlign:"center", border:"1px solid #c3e6cb", borderRadius:"5px", backgroundColor:"#d4edda", padding:"7px", color:"#155724" }}>{bookmakerSuccess}</p>}
+            {bookiesDetails.length > 0 ? <h6>My New Bookmaker Details</h6> :""}
+            {bookiesDetails.map((bookiesDetail, index) =>(
+            <div className="addedBookMakersDiv">
               <div>
                 <h6>BookMaker</h6>
                 <p style={{ marginBottom:"0" }}>{bookiesDetail.bookmaker}</p>
@@ -341,16 +405,80 @@ function Overview({ brand, routes }) {
 
         {!bookiesLoading ? (
         <>
-          {bookiesDetails && bookiesDetails.length > 0 && <button onClick={addBookMakerDetails} className="chooseBookMakers" style={{ marginTop:"10px", marginBottom:"5rem" }}>Submit</button>}
+          {bookiesDetails && bookiesDetails.length > 0 && <button onClick={addBookMakerDetails} className="chooseBookMakers" style={{ marginTop:"10px", marginBottom:"0rem" }}>Submit</button>}
         </>
-      ) : (
-        <button className="chooseBookMakers">
-          <i className="fa-solid fa-spinner"></i> Submit
-        </button>
-      )}
-        
-          
-      </div> */}
+        ) : (
+          <button className="chooseBookMakers">
+            <i className="fa-solid fa-spinner"></i> Submit
+          </button>
+        )}
+      </div>
+
+      <div className="addedBookMakersDivContainer" style={{ marginBottom:"3rem" }}>
+       <div style={{ display:"flex", justifyContent:"space-between" }}>
+        <h6>My Previous Bookmaker Details</h6>
+        <i class="fa-solid fa-chevron-down" style={{ cursor:"pointer" }} onClick={() => setOpenPreviousBookMakerDetails(!openPreviousBookMakerDetails)}></i>
+       </div>
+       {openPreviousBookMakerDetails ?
+        <>
+          {previousBookmakersArray && 
+            previousBookmakersArray.map((previousBookmaker) => (
+              <div className="addedBookMakersDiv">
+                <div>
+                  <h6>BookMaker</h6>
+                  <p style={{ marginBottom:"0" }}>{previousBookmaker.bookmaker}</p>
+                </div>
+                <div>
+                  <h6>Username</h6>
+                  <p style={{ marginBottom:"0" }}>{previousBookmaker.username}</p>
+                </div>
+                <div>
+                  <h6>Password</h6>
+                  <p style={{ marginBottom:"0" }}>{previousBookmaker.password}</p>
+                </div>
+              </div>
+            ))
+            }
+        </>:""
+       }
+      </div>
+
+      {loggedInUser.userDetails.isVendor &&
+        <div style={{ marginBottom:"1rem" }}>
+          <input onChange={(e)=> setUserArbsKingId(e.target.value)} type="search" placeholder="Arbsking ID" style={{ outline:"none", border:"1px solid #344767", marginRight:"1rem", padding:"3px 5px" }}/>
+          <button onClick={searchUserBookMarkerDetails}>Search</button>
+        </div>
+      }
+
+      {loggedInUser.userDetails.isVendor &&
+        <div className="addedBookMakersDivContainer" style={{ marginBottom:"3rem" }}>
+        <div style={{ display:"flex", justifyContent:"space-between" }}>
+          <h6>Users Bookmaker Details</h6>
+          <i class="fa-solid fa-chevron-down" style={{ cursor:"pointer" }} onClick={() => setIsSearchedUserBookies(!isSearchedUserBookies)}></i>
+        </div>
+        {isSearchedUserBookies && 
+            <>
+              {searchedUserBookies && searchedUserBookies.map((userBookie)=>
+                <div className="addedBookMakersDiv">
+                  <div>
+                    <h6>BookMaker</h6>
+                    <p style={{ marginBottom:"0" }}>{userBookie.bookmaker}</p>
+                  </div>
+                  <div>
+                    <h6>Username</h6>
+                    <p style={{ marginBottom:"0" }}>{userBookie.username}</p>
+                  </div>
+                  <div>
+                    <h6>Password</h6>
+                    <p style={{ marginBottom:"0" }}>{userBookie.password}</p>
+                  </div>
+                </div>
+              )}
+            </>
+          }
+          {searchedUserBookiesError && <p className="alert alert-danger">{searchedUserBookiesError}</p>}
+        </div>
+       }
 
       <div className="fotter">
         <Footer />

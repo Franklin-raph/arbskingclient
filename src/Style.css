@@ -17,7 +17,7 @@ a {
 }
 
 /*Styling Selectbox*/
-select {
+.select select {
   width: 300px;
   display: inline-block;
   background-color: #fff;
@@ -963,7 +963,7 @@ select {
   filter: invert(95%) sepia(97%) saturate(4122%) hue-rotate(323deg) brightness(102%) contrast(101%);
 }
 
-select {
+.select select {
   -webkit-appearance:none;
   -moz-appearance:none;
   -ms-appearance:none;
@@ -980,7 +980,8 @@ select {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
 }
-select::-ms-expand {
+
+.select select::-ms-expand {
   display: none;
 }
 
@@ -1003,6 +1004,7 @@ select::-ms-expand {
   border-radius: .25em;
   /* margin-left: 3em; */
 }
+
 .select::after {
   content: '\25BC';
   position: absolute;
@@ -1014,6 +1016,7 @@ select::-ms-expand {
   pointer-events:none;
   transition:.25s all ease;
 }
+
 .select:hover::after {
   color: #fff;
 }

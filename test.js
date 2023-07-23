@@ -40,3 +40,26 @@ const arr = ["Finland – Slovenia"];
 const newArray = arr[0].split(" – ").map((team) => team.trim());
 
 console.log(newArray);
+
+
+const array1 = [
+  { name: "frank", age: "20" },
+  { name: "Emma", age: "22" },
+  { name: "John", age: "25" }
+];
+
+const array2 = [
+  { name: "Alice", age: "30" },
+  { name: "Emma", age: "22" },
+  { name: "Bob", age: "28" },
+  { name: "John", age: "25" },
+  { name: "Eve", age: "23" }
+];
+
+// Create a Set of names from array1 for faster lookup
+const namesToRemove = new Set(array1.map(item => item.name));
+
+// Filter array2 to remove elements with names present in array1
+const newArray2 = array2.filter(item => !namesToRemove.has(item.name));
+
+console.log(newArray2);
