@@ -49,14 +49,22 @@ import PasswordResetPage from "layouts/authentication/password-reset-page";
 import EmailConfirmPage from "layouts/authentication/confirm-email";
 import Howtouse from "layouts/howtouse";
 import Referals from "layouts/referals";
+import Telegram from "components/Telegram/Telegram";
+
 
 export default function App() {
+  const [isTelegramModalOpen, setIsTelegramModalOpen] = useState(false);
+  const loggedInUser = JSON.parse(localStorage.getItem("user"))
+  
   return (
     <ThemeProvider theme={themeRTL}>
       <Routes>
         <Route path="/dashboard/authentication/sign-in" element={<SignIn />} />
         <Route path="/dashboard/authentication/sign-up" element={<SignUp />} />
-        <Route path="/dashboard/authentication/trouble-logging-in" element={<TroubleLoggingInPage />} />
+        <Route
+          path="/dashboard/authentication/trouble-logging-in"
+          element={<TroubleLoggingInPage />}
+        />
         <Route
           path="/dashboard/authentication/sign-up/register-refered/:id"
           element={<ReferalSignUp />}
@@ -77,9 +85,18 @@ export default function App() {
           path="/dashboard/arbitragecalculator"
           element={<RTL brand={brand} routes={routes} />}
         />
-        <Route path="/dashboard/referals" element={<Referals routes={routes} brand={brand}/> } />
-        <Route path="*" element={<PageNotFound routes={routes} brand={brand}/> } />
+        <Route path="/dashboard/referals" element={<Referals routes={routes} brand={brand} />} />
+        <Route path="*" element={<PageNotFound routes={routes} brand={brand} />} />
       </Routes>
+      {isTelegramModalOpen && <Telegram setIsTelegramModalOpen={setIsTelegramModalOpen}/>}
+        {loggedInUser && loggedInUser.userSubscription.statusResult === "Not Expired" ?
+          <div className="telegramIcon" onClick={() => setIsTelegramModalOpen(true)}>
+            <i className="fa-brands fa-telegram"></i>
+          </div>
+          :
+          ""
+        }
+      
     </ThemeProvider>
   );
 }

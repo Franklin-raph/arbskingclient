@@ -145,7 +145,7 @@ const routes = [
 
   {
     type: "collapse",
-    name: "Referrals",
+    name: "Referrals/Earnings",
     key: "Referals",
     route: "/dashboard/referals",
     icon: <TransferWithinAStation size="12px" />,
