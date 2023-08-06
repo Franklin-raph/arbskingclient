@@ -164,6 +164,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
     setUserBalance(data.userBalance);
     setAnnouncementDot(data.notification)
     console.log(data.notification)
+    console.log(data)
     // setNotification(data.notification);
     if (data.jwtStatus !== "Not Expired") {
       changeLoginStatusIfJwtExpires();
