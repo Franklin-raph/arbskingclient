@@ -375,7 +375,7 @@ function Dashboard({ brand, routes }) {
 
           {arbs === null ?
               <div style={{ textAlign:"center", fontSize:"13px", padding:"10px", color:'#842029', backgroundColor:"#f8d7da", border:"1px solid #f5c2c7", borderRadius:"10px" }}>
-                <p style={{ marginBottom:"0" }}>User currently do not have an active subscription.</p>
+                <p style={{ marginBottom:"0" }}>You currently do not have an active subscription.</p>
                 <p style={{ marginBottom:"0" }}>The game below can't be played. It's just an examle of how games are displayed on arbsking for active subscribed users</p>
               </div>
            : ""}
