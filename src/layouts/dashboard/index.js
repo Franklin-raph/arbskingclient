@@ -324,7 +324,7 @@ function Dashboard({ brand, routes }) {
       if(response) setPhoneNumberLoading(!phoneNumberLoading)
       if(response.ok){
         setPhoneNumberMsg(data.message)
-        
+        location.reload()
       }
   
       if(!response.ok){
