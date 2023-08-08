@@ -62,7 +62,7 @@ function Dashboard({ brand, routes }) {
   const [bookmarkers, setBookmarkers] = useState();
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectedItemId, setSelectedItemId] = useState(null);
-  const [isPhoneNumberSaved, setIsPhoneNumberSaved] = useState(false)
+  const [isPhoneNumberSaved, setIsPhoneNumberSaved] = useState(true)
   const [phoneNumberLoading, setPhoneNumberLoading] = useState(false)
   const [phoneNumberMsg, setPhoneNumberMsg] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
