@@ -71,8 +71,8 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(Object.keys(formData));
-    if (Object.keys(formData).length !== 5 && formData.constructor === Object) {
+    console.log(Object.keys(formData), formData);
+    if (Object.keys(formData).length !== 6 && formData.constructor === Object) {
       console.log("Empty object");
       setError("Please fill in all fields");
       return;
@@ -192,6 +192,15 @@ function SignUp() {
                     name="email"
                     onChange={handleFormData}
                     placeholder="Email"
+                    required
+                  />
+                </SoftBox>
+                <SoftBox mb={2}>
+                  <SoftInput
+                    type="number"
+                    name="Phone Number"
+                    onChange={handleFormData}
+                    placeholder="Phone Number"
                     required
                   />
                 </SoftBox>

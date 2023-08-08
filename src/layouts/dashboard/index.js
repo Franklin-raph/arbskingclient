@@ -62,6 +62,8 @@ function Dashboard({ brand, routes }) {
   const [bookmarkers, setBookmarkers] = useState();
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const [isPhoneNumberSaved, setIsPhoneNumberSaved] = useState(false)
+  const [phoneNumber, setPhoneNumber] = useState("")
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
@@ -295,6 +297,19 @@ function Dashboard({ brand, routes }) {
 
   function openNoSubMsg(){
     setNoSubModal(!noSubModal)
+  }
+
+  async function savePhoneNumber(){
+    const response = await fetch("https://sportbetpredict.onrender.com/api/account/add/phone-number", {
+      method:"POST",
+      body:JSON.stringify({phoneNumber:phoneNumber}),
+      headers : {
+        "Content-Type":"application/json",
+        Authorization: `Bearer ${loggedInUser.token}`
+      }
+    })
+    const data = await response.json()
+    console.log(data)
   }
 
   return (
@@ -631,6 +646,17 @@ function Dashboard({ brand, routes }) {
           )}
         </SoftBox>
       </div>
+
+      {isPhoneNumberSaved ? "" :
+        <div className="phoneNumberModalBg">
+          <div className="phoneNumberModal">
+            <label>Phone Number is required</label>
+            <input type="number" placeholder="Phone Number" onChange={(e)=> setPhoneNumber(e.target.value)}/>
+            <button onClick={savePhoneNumber}>Submit</button>
+          </div>
+        </div>
+       }
+      
       <div className="fotter">
         {/* <Footer /> */}
       </div>

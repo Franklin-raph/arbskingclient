@@ -77,6 +77,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const [announcements, setAnnouncments] = useState([]);
   const [isAnnouncementOpen, setIsAnnouncementOpen] = useState(false);
   const [announcementDot, setAnnouncementDot] = useState(false);
+  const [isPhoneNumberSaved, setIsPhoneNumberSaved] = useState(false)
+  const [phoneNumber, setPhoneNumber] = useState("")
   const { user } = useAuth();
   const { setUser } = useAuth();
 
@@ -169,6 +171,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
     if (data.jwtStatus !== "Not Expired") {
       changeLoginStatusIfJwtExpires();
       navigate("/dashboard/authentication/sign-in");
+    }
+
+    if(data.isPhoneNumberSaved === false){
+      setIsPhoneNumberSaved(true)
     }
   }
 

@@ -367,7 +367,7 @@ a {
   position: absolute;
   cursor: pointer;
   z-index: 99;
-  top: 335px;
+  top: 392px;
   right: 30px;
 }
 
@@ -710,7 +710,7 @@ a {
   right: 2%;
 }
 
-.telegramModalBg{
+.telegramModalBg, .phoneNumberModalBg{
   position: fixed;
   background-color: #8b97a8df;
   top: 50%;
@@ -724,7 +724,7 @@ a {
   justify-content: center;
 }
 
-.telegramModal{
+.telegramModal, .phoneNumberModal{
   background-color: #fff;
   border-radius: 10px;
   padding:1.5rem 1rem;
@@ -734,6 +734,24 @@ a {
   flex-direction: column;
   position: relative;
   text-align: center;
+}
+
+.phoneNumberModal button{
+  all: unset;
+  margin-top: 10px;
+  background: linear-gradient(to right, #21BBFE, #217EFE);
+  color: #fff;
+  border-radius: 3px;
+  padding: 3px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.phoneNumberModal input{
+  outline: none;
+  width: 100%;
+  border: 1px solid #344767;
+  margin-top: 10px;
 }
 
 .telegramModal a{
