@@ -63,6 +63,7 @@ function Dashboard({ brand, routes }) {
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [isPhoneNumberSaved, setIsPhoneNumberSaved] = useState(false)
+  const [phoneNumberLoading, setPhoneNumberLoading] = useState(false)
   const [phoneNumberMsg, setPhoneNumberMsg] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
   const { size } = typography;
@@ -301,23 +302,34 @@ function Dashboard({ brand, routes }) {
   }
 
   async function savePhoneNumber(){
-    const response = await fetch("https://sportbetpredict.onrender.com/api/account/add/phone-number", {
-      method:"POST",
-      body:JSON.stringify({phoneNumber:phoneNumber}),
-      headers : {
-        "Content-Type":"application/json",
-        Authorization: `Bearer ${loggedInUser.token}`
+    if(phoneNumber.length <= 0){
+      setPhoneNumberMsg("Please fill in the field")
+      setTimeout(() => {
+        setPhoneNumberMsg("")
+      },5000)
+      return
+    }else{
+      setPhoneNumberLoading(true)
+      const response = await fetch("https://sportbetpredict.onrender.com/api/account/add/phone-number", {
+        method:"POST",
+        body:JSON.stringify({phoneNumber:phoneNumber}),
+        headers : {
+          "Content-Type":"application/json",
+          Authorization: `Bearer ${loggedInUser.token}`
+        }
+      })
+      const data = await response.json()
+      if(response) setPhoneNumberLoading(!phoneNumberLoading)
+      if(response.ok){
+        setPhoneNumberMsg(data.message)
+        setIsPhoneNumberSaved(!isPhoneNumberSaved)
       }
-    })
-    const data = await response.json()
-    if(response.ok){
-      setPhoneNumberMsg(data.message)
+  
+      if(!response.ok){
+        setPhoneNumber(data.message)
+      }
     }
-
-    if(!response.ok){
-      setPhoneNumber(data.message)
-    }
-    console.log(data)
+    
   }
 
   return (
@@ -661,7 +673,8 @@ function Dashboard({ brand, routes }) {
             <label>Phone Number is required</label>
             {phoneNumberMsg && <p>{phoneNumberMsg}</p>}
             <input type="number" placeholder="Phone Number" onChange={(e)=> setPhoneNumber(e.target.value)}/>
-            <button onClick={savePhoneNumber}>Submit</button>
+            {phoneNumberLoading ? <button><i class="fa-solid fa-spinner fa-spin"></i></button> : <button onClick={savePhoneNumber}>Submit</button>}
+            
           </div>
         </div>
        }
