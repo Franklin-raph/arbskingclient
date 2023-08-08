@@ -63,6 +63,7 @@ function Dashboard({ brand, routes }) {
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [isPhoneNumberSaved, setIsPhoneNumberSaved] = useState(false)
+  const [phoneNumberMsg, setPhoneNumberMsg] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
@@ -309,6 +310,13 @@ function Dashboard({ brand, routes }) {
       }
     })
     const data = await response.json()
+    if(response.ok){
+      setPhoneNumberMsg(data.message)
+    }
+
+    if(!response.ok){
+      setPhoneNumber(data.message)
+    }
     console.log(data)
   }
 
@@ -647,10 +655,11 @@ function Dashboard({ brand, routes }) {
         </SoftBox>
       </div>
 
-      {isPhoneNumberSaved ? "" :
+      {!isPhoneNumberSaved ? "" :
         <div className="phoneNumberModalBg">
           <div className="phoneNumberModal">
             <label>Phone Number is required</label>
+            {phoneNumberMsg && <p>{phoneNumberMsg}</p>}
             <input type="number" placeholder="Phone Number" onChange={(e)=> setPhoneNumber(e.target.value)}/>
             <button onClick={savePhoneNumber}>Submit</button>
           </div>
