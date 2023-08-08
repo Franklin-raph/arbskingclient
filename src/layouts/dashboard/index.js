@@ -655,7 +655,7 @@ function Dashboard({ brand, routes }) {
         </SoftBox>
       </div>
 
-      {!isPhoneNumberSaved ? "" :
+      {isPhoneNumberSaved ? "" :
         <div className="phoneNumberModalBg">
           <div className="phoneNumberModal">
             <label>Phone Number is required</label>
