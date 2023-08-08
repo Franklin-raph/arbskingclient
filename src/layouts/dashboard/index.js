@@ -89,8 +89,10 @@ function Dashboard({ brand, routes }) {
         Authorization: `Bearer ${loggedInUser.token}`,
       },
     });
+    const data = await response.json();
     if (response) {
       setIsLoading(false);
+      setIsPhoneNumberSaved(data.isPhoneNumberSaved)
     }
     if (response.status === 401) {
       setArbsInvalid([{
@@ -110,7 +112,7 @@ function Dashboard({ brand, routes }) {
     }
 
     if (response.ok) {
-      const data = await response.json();
+      
       console.log(data);
       setArbs(data);
       data.arbs.map((bookmaker) => {
@@ -322,7 +324,7 @@ function Dashboard({ brand, routes }) {
       if(response) setPhoneNumberLoading(!phoneNumberLoading)
       if(response.ok){
         setPhoneNumberMsg(data.message)
-        setIsPhoneNumberSaved(!isPhoneNumberSaved)
+        
       }
   
       if(!response.ok){
@@ -674,7 +676,6 @@ function Dashboard({ brand, routes }) {
             {phoneNumberMsg && <p>{phoneNumberMsg}</p>}
             <input type="number" placeholder="Phone Number" onChange={(e)=> setPhoneNumber(e.target.value)}/>
             {phoneNumberLoading ? <button><i class="fa-solid fa-spinner fa-spin"></i></button> : <button onClick={savePhoneNumber}>Submit</button>}
-            
           </div>
         </div>
        }
