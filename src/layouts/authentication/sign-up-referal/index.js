@@ -50,6 +50,7 @@ function SignUp() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("")
   const params = useParams();
 
   const { user } = useAuth();
@@ -78,7 +79,7 @@ function SignUp() {
   const handleSubmit = async (e) => {
     console.log({ ...formData, referral_id: params.id });
     e.preventDefault();
-    if (Object.keys(formData).length !== 5 && formData.constructor === Object) {
+    if (Object.keys(formData).length !== 6 && formData.constructor === Object) {
       setError("Please fill in all fields");
       return;
     }
@@ -196,6 +197,15 @@ function SignUp() {
                     type="text"
                     name="username"
                     placeholder="Username"
+                    onChange={handleFormData}
+                    required
+                  />
+                </SoftBox>
+                <SoftBox mb={2}>
+                  <SoftInput
+                    type="text"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
                     onChange={handleFormData}
                     required
                   />
