@@ -104,6 +104,7 @@ function Dashboard({ brand, routes }) {
         markets : "Over 6, Under 6.5, Under 5.5",
         matchTime : "16/07, 10:00",
         odds : "2.12, 3.00, 5.00",
+        sport:"Football",
         profit : 34.7,
         teams : "CPK FC – Sporting Macau",
         _id : "64b2952fc117be4b9d02c0e4",
@@ -444,6 +445,7 @@ function Dashboard({ brand, routes }) {
                           </div>
                         </div>
                         <small className="league">{arb.league}</small>
+                        <small className="league">{arb.sport}</small>
                       </div>
 
                       <div className="time-market-calc">
@@ -567,6 +569,7 @@ function Dashboard({ brand, routes }) {
                           </div>
                         </div>
                         <small className="league">{arb.league}</small>
+                        <small className="league">{arb.sport}</small>
                       </div>
 
                       <div className="time-market-calc">

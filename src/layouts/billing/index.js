@@ -37,9 +37,10 @@ function Payment({ brand, routes }) {
   const [subMsg, setSubMsg] = useState("");
   const [copyICon, setCopyIcon] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [loading12, setLoading12] = useState(false);
-  const [loading65, setLoading65] = useState(false);
-  const [loading130, setLoading130] = useState(false);
+  const [subLoading, setSubLoading] = useState(false);
+  const [basicSubType, setBasicSubType] = useState(false);
+  const [standrdSubType, setStandrdSubType] = useState(false);
+  const [premiumSubType, setPremiumSubType] = useState(false);
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
   // function openModal() {
   //   setSubScriptionModalOpen(!subScriptionModalOpen);
@@ -64,15 +65,9 @@ function Payment({ brand, routes }) {
     getUsersSubscriptionStatus();
   }, []);
 
-  async function payForSub(subId, subAmount) {
-    if (subAmount === "12") {
-      setLoading12(true);
-    } else if (subAmount === "65") {
-      setLoading65(true);
-    } else {
-      setLoading130(true);
-    }
-    console.log(subId);
+  async function payForSub(subId) {
+    setSubLoading(true);
+    console.log(subId, subLoading);
     const response = await fetch("https://sportbetpredict.onrender.com/api/purchase/subscription", {
       method: "POST",
       body: JSON.stringify({
@@ -84,19 +79,24 @@ function Payment({ brand, routes }) {
         Authorization: `Bearer ${loggedInUser.token}`,
       },
     });
+    console.log(response)
     if (response) {
-      setLoading12(false);
-      setLoading65(false);
-      setLoading130(false);
+      setBasicSubType(false)
+      setStandrdSubType(false)
+      setPremiumSubType(false)
+      setSubLoading(false);
+      console.log(subLoading)
       getUsersSubscriptionStatus();
     }
     const data = await response.json();
+    console.log(data.message)
     setSubMsg(data.message);
     setTimeout(() => {
       setSubMsg();
     }, 5000);
     console.log(data);
   }
+  console.log(subMsg)
 
   async function getUsersSubscriptionStatus() {
     setLoading(true);
@@ -264,13 +264,17 @@ function Payment({ brand, routes }) {
               </p>
               <div className="whatsApplinkNumbers">
                 <p>
-                  If you don't know how to make payment to the designated address independently, 
-                  we offer you an alternative solution of engaging one of our esteemed verified vendors.<br />
+                  If you don't know how to make payment to the designated address independently, we
+                  offer you an alternative solution of engaging one of our esteemed verified
+                  vendors.
+                  <br />
                   You can contact them via the WhatsApp contacts below
                 </p>
                 <div>
                   <i class="fa-brands fa-whatsapp"></i>
-                  <a target="_blank" href="https://wa.me/message/QWVCK5JG65EKH1">Vendor 1</a>
+                  <a target="_blank" href="https://wa.me/message/QWVCK5JG65EKH1">
+                    Vendor 1
+                  </a>
                 </div>
               </div>
             </div>
@@ -280,21 +284,44 @@ function Payment({ brand, routes }) {
             <Grid container spacing={3}>
               <Grid item xs={12} lg={4}>
                 <Grid item xs={12}>
-                  <div className="subscriptionPlans">
+                  <div className="subscriptionPlans" style={{ padding: "10px" }}>
                     <h3>Basic</h3>
                     <div className="priceAndDuration">
-                      <h2>$12</h2>
-                      <p>Monthly</p>
+                      <div>
+                        <h2>$5</h2>
+                        <p>Weekly</p>
+                      </div>
+                      <div>
+                        <h2>$12</h2>
+                        <p>Monthly</p>
+                      </div>
                     </div>
-                    {!loading12 ? (
-                      <button onClick={() => payForSub("64690b1694617642d7b9ef9f", "12")}>
-                        Subscribe
-                      </button>
-                    ) : (
-                      <button className="disabledBtn">
-                        <i className="fa-solid fa-spinner"></i> Subscribe
-                      </button>
-                    )}
+                    <ul style={{ textAlign: "start" }}>
+                      <li>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <p>Access to the betting arbitrage opportunity provider.</p>
+                      </li>
+                      <li>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <p>Utilization of the arbitrage calculator for football matches.</p>
+                      </li>
+                      <li>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <p>
+                          Scanning and comparison of opportunities across 15 sports betting
+                          bookmakers.
+                        </p>
+                      </li>
+                      <li>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <p>Daily updates on potential arbitrage opportunities.</p>
+                      </li>
+                      <li>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <p>Entry-level community access for discussions and sharing tips.</p>
+                      </li>
+                    </ul>
+                      <button onClick={() => setBasicSubType(true)}>Subscribe</button>
                   </div>
                 </Grid>
               </Grid>
@@ -302,42 +329,206 @@ function Payment({ brand, routes }) {
                 <div className="subscriptionPlans second">
                   <h3>Standard</h3>
                   <div className="priceAndDuration">
-                    <h2>$65</h2>
-                    <p>6 - Months</p>
+                    <div>
+                      <h2>$10</h2>
+                      <p>Weekly</p>
+                    </div>
+                    <div>
+                      <h2>$30</h2>
+                      <p>Monthly</p>
+                    </div>
                   </div>
-                  {!loading65 ? (
-                    <button onClick={() => payForSub("64690b1e94617642d7b9efa0", "65")}>
-                      Subscribe
-                    </button>
-                  ) : (
-                    <button className="disabledBtn">
-                      <i className="fa-solid fa-spinner"></i> Subscribe
-                    </button>
-                  )}
+                  <ul style={{ textAlign: "start" }}>
+                    <li>
+                      <i class="fa-solid fa-circle-check"></i>
+                      <p>All features from the Basic Tier.</p>
+                    </li>
+                    <li>
+                      <i class="fa-solid fa-circle-check"></i>
+                      <p>Expanded coverage to include a variety of sports, beyond just football.</p>
+                    </li>
+                    <li>
+                      <i class="fa-solid fa-circle-check"></i>
+                      <p>Scanning and comparison across 30 sports betting bookmakers.</p>
+                    </li>
+                    <li>
+                      <i class="fa-solid fa-circle-check"></i>
+                      <p>Access to premium community features and advanced tips.</p>
+                    </li>
+                  </ul>
+                    <button onClick={() => setStandrdSubType(true)}>Subscribe</button>
                 </div>
               </Grid>
               <Grid item xs={12} lg={4}>
                 <div className="subscriptionPlans third">
                   <h3>Premium</h3>
                   <div className="priceAndDuration">
-                    <h2>$130</h2>
-                    <p>Yearly</p>
+                    <div>
+                      <h2>$20</h2>
+                      <p>Weekly</p>
+                    </div>
+                    <div>
+                      <h2>$70</h2>
+                      <p>Monthly</p>
+                    </div>
                   </div>
-                  {!loading130 ? (
-                    <button onClick={() => payForSub("64690b0b94617642d7b9ef9e", "130")}>
-                      Subscribe
-                    </button>
-                  ) : (
-                    <button className="disabledBtn">
-                      <i className="fa-solid fa-spinner"></i> Subscribe
-                    </button>
-                  )}
+                  <ul style={{ textAlign: "start", fontSize: "15px" }}>
+                    <li>
+                      <i class="fa-solid fa-circle-check"></i>
+                      <p>All features from the mixed Tier.</p>
+                    </li>
+                    <li>
+                      <i class="fa-solid fa-circle-check"></i>
+                      <p>Priority access to real-time arbitrage opportunities.</p>
+                    </li>
+                    <li>
+                      <i class="fa-solid fa-circle-check"></i>
+                      <p>Exclusive investment strategy webinars and workshops.</p>
+                    </li>
+                    <li>
+                      <i class="fa-solid fa-circle-check"></i>
+                      <p>Personalized subscription plans that cater to different budget levels.</p>
+                    </li>
+                  </ul>
+                    <button onClick={() => setPremiumSubType(true)}>Subscribe</button>
                 </div>
               </Grid>
             </Grid>
           </SoftBox>
         </SoftBox>
       </div>
+      {basicSubType && (
+        <div className="subTypeModalBg">
+          {subLoading ?
+          <div className="subTypeModal" style={{ position: "relative" }}>
+          
+          <h4 style={{ marginBottom: "25px", fontWeight: "400", textAlign:"center",  color: "#344767" }}>
+            Purchasing Sub Please wait
+          </h4>
+          <div
+            className="subPrice"
+            style={{ display: "flex", alignItems: "center", gap: "10px" }}
+          >
+            <i className="fa-solid fa-spinner fa-spin" style={{ fontSize:"22px" }}></i>
+          </div>
+        </div>
+        :
+        <div className="subTypeModal" style={{ position: "relative" }}>
+            <i
+              className="ri-close-circle-fill"
+              style={{
+                fontSize: "30px",
+                textTransform: "uppercase",
+                position: "fixed",
+                top: "3%",
+                right: "3%",
+                cursor: "pointer",
+              }}
+              onClick={() => setBasicSubType(false)}
+            ></i>
+            <h4 style={{ marginBottom: "25px", fontWeight: "400", textAlign:"center",  color: "#344767" }}>
+              Choose Subscription Plan
+            </h4>
+            <div
+              className="subPrice"
+              style={{ display: "flex", alignItems: "center", gap: "10px" }}
+            >
+              <button onClick={()=> payForSub("64de6ac96f116424c6454124")}>$5 / week</button>
+              <p style={{ margin: "0" }}>Or</p>
+              <button onClick={()=> payForSub("64690b1694617642d7b9ef9f")}>$12 / Month</button>
+            </div>
+          </div>
+            }
+        </div>
+      )}
+      {standrdSubType && (
+        <div className="subTypeModalBg">
+          {subLoading ?
+          <div className="subTypeModal" style={{ position: "relative" }}>
+          
+          <h4 style={{ marginBottom: "25px", fontWeight: "400", textAlign:"center",  color: "#344767" }}>
+            Purchasing Sub Please wait
+          </h4>
+          <div
+            className="subPrice"
+            style={{ display: "flex", alignItems: "center", gap: "10px" }}
+          >
+            <i className="fa-solid fa-spinner fa-spin" style={{ fontSize:"22px" }}></i>
+          </div>
+        </div>
+        :
+          <div className="subTypeModal" style={{ position: "relative" }}>
+            <i
+              className="ri-close-circle-fill"
+              style={{
+                fontSize: "30px",
+                textTransform: "uppercase",
+                position: "fixed",
+                top: "3%",
+                right: "3%",
+                cursor: "pointer",
+              }}
+              onClick={() => setStandrdSubType(false)}
+            ></i>
+            <h4 style={{ marginBottom: "25px", fontWeight: "400", textAlign:"center", color: "#344767" }}>
+              Choose Subscription Plan
+            </h4>
+            <div
+              className="subPrice"
+              style={{ display: "flex", alignItems: "center", gap: "10px" }}
+            >
+              <button onClick={()=> payForSub("64de6c356f116424c6454125")}>$10 / week</button>
+              <p style={{ margin: "0" }}>Or</p>
+              <button onClick={()=> payForSub("64de6c406f116424c6454126")}>$30 / Month</button>
+            </div>
+          </div>
+          }
+        </div>
+      )}
+      {premiumSubType && (
+        <div className="subTypeModalBg">
+          {subLoading ?
+          <div className="subTypeModal" style={{ position: "relative" }}>
+          
+          <h4 style={{ marginBottom: "25px", fontWeight: "400", textAlign:"center",  color: "#344767" }}>
+            Purchasing Sub Please wait
+          </h4>
+          <div
+            className="subPrice"
+            style={{ display: "flex", alignItems: "center", gap: "10px" }}
+          >
+            <i className="fa-solid fa-spinner fa-spin" style={{ fontSize:"22px" }}></i>
+          </div>
+        </div>
+        :
+          <div className="subTypeModal" style={{ position: "relative" }}>
+            <i
+              className="ri-close-circle-fill"
+              style={{
+                fontSize: "30px",
+                textTransform: "uppercase",
+                position: "fixed",
+                top: "3%",
+                right: "3%",
+                cursor: "pointer",
+              }}
+              onClick={() => setPremiumSubType(false)}
+            ></i>
+            <h4 style={{ marginBottom: "25px", fontWeight: "400", textAlign:"center", color: "#344767" }}>
+              Choose Subscription Plan
+            </h4>
+            <div
+              className="subPrice"
+              style={{ display: "flex", alignItems: "center", gap: "10px" }}
+            >
+              <button onClick={()=> payForSub("64de6ca56f116424c6454128")}>$20 / week</button>
+              <p style={{ margin: "0" }}>Or</p>
+              <button onClick={()=> payForSub("64de6c996f116424c6454127")}>$70 / Month</button>
+            </div>
+          </div>
+          }
+        </div>
+      )}
       <div className="fotter">
         <Footer />
       </div>

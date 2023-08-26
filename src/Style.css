@@ -311,18 +311,86 @@ a {
   font-size: 20px;
 }
 
+.subTypeModalBgBg{
+
+}
+
+.subTypeModalBg{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: #fff;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.727);
+  padding: 4.5rem 1.5rem 3.5rem;
+  border-radius: 6px;
+  border: 1px solid #344767;
+  width: 32%;
+}
+
+.subscriptionPlans p{
+  margin: 0;
+}
+
+.subscriptionPlans ul li{
+  list-style: none;
+  display: flex;
+  gap: 5px;
+  font-size: 15px;
+  margin: 10px 0;
+}
+
+.subTypeModal{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 9px;
+}
+
 .priceAndDuration{
-  margin: 3rem 0;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.priceAndDuration div{
+  border: 1px solid #344767;
+  padding: 5px 20px;
+}
+
+.priceAndDuration div:nth-child(1){
+  border-radius: 8px 0 0 8px;
+}
+
+.priceAndDuration div:nth-child(2){
+  border-radius: 0 8px 8px 0;
 }
 
 .priceAndDuration h2{
-  font-size: 60px;
+  font-size: 40px;
   font-weight: bold;
 }
 
 .subscriptionPlans button{
   all: unset;
   width: 50%;
+  background: linear-gradient(to right, #21BBFE, #217EFE);
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: .5s;
+  border: 1px solid transparent;
+}
+
+.subTypeModal button{
+  all: unset;
   background: linear-gradient(to right, #21BBFE, #217EFE);
   color: #fff;
   padding: 7px 10px;
@@ -1475,6 +1543,10 @@ input[type="checkbox"]{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .subTypeModalBg{
+    width: 45%;
+  }
 }
 
 @media screen and (max-width: 940px) {
@@ -1564,6 +1636,10 @@ input[type="checkbox"]{
 
   .addBookmakerDetailsInputDiv input{
     width: 100%;
+  }
+  
+  .subTypeModalBg{
+    width: 55%;
   }
 }
 
@@ -1767,6 +1843,10 @@ input[type="checkbox"]{
   .noSubModalMsg, .telegramModal{
     width: 80%;
   }
+
+  .subTypeModalBg{
+    width: 75%;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -1799,6 +1879,20 @@ input[type="checkbox"]{
 
   .telegramModal{
     font-size: 14px;
+  }
+  
+  .subTypeModalBg{
+    width: 90%;
+  }
+}
+
+@media screen and (max-width:375px) {
+  .subPrice{
+    flex-direction: column;
+  }
+
+  .subTypeModal h4{
+    font-size: 18px;
   }
 }
 
